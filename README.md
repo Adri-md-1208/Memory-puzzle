@@ -1,2 +1,3 @@
 # Python-games
-I create some basic games with the pygame framework
+Pygame is a set of python modules designed to developing video games in 2D
+I used that library in order to develop some basic games
