@@ -16,6 +16,7 @@ GREY   = (128, 128, 128)
 RED    = (255,   0,   0)
 GREEN  = (  0, 255,   0)
 YELLOW = (255, 255,   0)
+BLUE   = (  0,   0, 255)
 VIOLET = (120,  40, 140)
 
 # DRAWING
@@ -31,6 +32,9 @@ pygame.draw.line(DISPLAY, YELLOW, (300, 50), (275, 75), 5)
 pygame.draw.line(DISPLAY, YELLOW, (300, 100), (300, 50), 5)
 pygame.draw.line(DISPLAY, VIOLET, (350, 100), (350, 50), 5)
 pygame.draw.arc(DISPLAY, VIOLET, (325, 50, 50, 50), (3*pi)/2, pi/2, 5)
+pygame.draw.circle(DISPLAY, BLUE, (250, 250), 25, 5)
+pygame.draw.polygon(DISPLAY, RED, ((450, 450), (400, 450), (300, 350), (250, 300), (500, 120)))
+pygame.draw.ellipse(DISPLAY, GREEN, (30, 430, 220, 15), 5)
 
 # MAIN LOOP
 
