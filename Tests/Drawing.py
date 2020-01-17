@@ -18,6 +18,7 @@ GREEN  = (  0, 255,   0)
 YELLOW = (255, 255,   0)
 BLUE   = (  0,   0, 255)
 VIOLET = (120,  40, 140)
+WHITE  = (255, 255, 255)
 
 # DRAWING
 
@@ -35,6 +36,13 @@ pygame.draw.arc(DISPLAY, VIOLET, (325, 50, 50, 50), (3*pi)/2, pi/2, 5)
 pygame.draw.circle(DISPLAY, BLUE, (250, 250), 25, 5)
 pygame.draw.polygon(DISPLAY, RED, ((450, 450), (400, 450), (300, 350), (250, 300), (500, 120)))
 pygame.draw.ellipse(DISPLAY, GREEN, (30, 430, 220, 15), 5)
+
+pixObj = pygame.PixelArray(DISPLAY)
+pixObj[30][30] = WHITE
+pixObj[50][67] = WHITE
+pixObj[122][234] = WHITE
+pixObj[98][344] = WHITE
+del pixObj
 
 # MAIN LOOP
 
