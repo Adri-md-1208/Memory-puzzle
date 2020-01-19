@@ -13,10 +13,14 @@ pygame.display.set_caption("Animations")
 BLACK = (0, 0, 0)
 
 # MOVEMENT
-boo = pygame.image.load("boo.png")
+boo = pygame.image.load("C:/Users/Adrián/Desktop/Python-games/Tests/boo.png")
 booX = 300
 booY = 200
 direction = ("R", "L", "U", "D") # Right, left, up and down
+
+# MUSIC
+pygame.mixer.music.load("C:/Users/Adrián/Desktop/Python-games/Tests/music.mp3")
+pygame.mixer.music.play(-1, 0.0)
 
 # MAIN LOOP
 while True:
