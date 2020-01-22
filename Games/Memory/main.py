@@ -30,3 +30,4 @@ HIGHLIGHTCOLOR = CYAN
 BOXCOLOR = BLUE
 
 # SPRITES 
+pokeball = pygame.image.load('pokeball.png')
