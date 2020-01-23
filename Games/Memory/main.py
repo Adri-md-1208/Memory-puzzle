@@ -29,5 +29,31 @@ BGCOLOR = GRAY
 HIGHLIGHTCOLOR = CYAN
 BOXCOLOR = BLUE
 
+DISPLAY = pygame.display.set_mode((640, 480))
+pygame.display.set_caption('Memory puzzle!')
+
 # SPRITES 
-pokeball = pygame.image.load('pokeball.png')
+pokeball = pygame.image.load('C:/Users/Adrián/Desktop/Python-games/Games/Memory/sprites/pokeball.png')
+greatball = pygame.image.load('C:/Users/Adrián/Desktop/Python-games/Games/Memory/sprites/greatball.png')
+ultraball = pygame.image.load('C:/Users/Adrián/Desktop/Python-games/Games/Memory/sprites/ultraball.png')
+premierball = pygame.image.load('C:/Users/Adrián/Desktop/Python-games/Games/Memory/sprites/premierball.png')
+masterball = pygame.image.load('C:/Users/Adrián/Desktop/Python-games/Games/Memory/sprites/masterball.png')
+
+# MAIN LOOP
+while True:
+
+    pygame.init()
+    DISPLAY.fill(GRAY)
+
+    for event in pygame.event.get():
+        if event.type == QUIT:
+            pygame.quit()
+            sys.exit()
+
+    DISPLAY.blit(pokeball, (100, 100))
+    DISPLAY.blit(greatball, (200, 200))
+    DISPLAY.blit(ultraball, (300, 300))
+    DISPLAY.blit(premierball, (400, 400))
+    DISPLAY.blit(masterball, (400, 200))
+
+    pygame.display.update()
