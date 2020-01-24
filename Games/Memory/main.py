@@ -13,7 +13,7 @@ WINDOWHEIGHT = 480
 WINDOWWIDTH  = 640
 REVEALSPEED  =   8 # Time of reveal animation
 BOXSIZE      =  40
-GAPSIZE      =  10
+GAPSIZE      =  10 # Size between boxes
 COLUMNS      =   4 
 ROWS         =   4
 assert (COLUMNS * ROWS) % 2 == 0 , 'The number of boxes must be even'
@@ -28,7 +28,7 @@ BLUE = (  0,   0, 255)
 CYAN = (  0, 255, 255)
 
 BGCOLOR = GRAY
-HIGHLIGHTCOLOR = CYAN
+HIGHLIGHTCOLOR = CYAN # The color around every box
 BOXCOLOR = BLUE
 
 # DISPLAY
@@ -53,14 +53,41 @@ assert (len(BALLS) * 2) == (COLUMNS * ROWS), 'The number of sprites must be equa
 
 # MAIN LOOP
 #################################################################################################################################
-while True:
-
+def main():
+    global FPSCLOCK, DISPLAY
     pygame.init()
+    FPSCLOCK = pygame.time.Clock()
+    DISPLAY = pygame.display.set_mode((WINDOWHEIGHT, WINDOWWIDTH))
+    pygame.display.set_caption('Memory puzzle [pokeball version]')
+
+    mousex = 0
+    mousey = 0
+
+    mainBoard = getRandomizedBoard() # in line 
+    revealedBoxes = setRevealedBoxes(False) # in line
+
+    firstSelection = None # Boolean type variable that set if the first box was revealed
+
     DISPLAY.fill(BGCOLOR)
+    startGameAnimation(mainBoard) # in line 
 
-    for event in pygame.event.get():
-        if event.type == QUIT:
-            pygame.quit()
-            sys.exit()
+    while True:
+        mouseClicked() = False
 
-    pygame.display.update()
+        DISPLAY.fill(BGCOLOR)
+        drawBoard(mainBoard, revealedBoxes) # in line 
+
+        for event in pygame.event.get():
+            if event.type == QUIT or (event.type == KEYUP and event.key == K_ESCAPE):
+                pygame.quit()
+                sys.exit()
+            elif event.type == MOUSEMOTION:
+                mousex, mousey = event.pos
+            elif event.type == MOUSEBUTTONUP:
+                mousex, mousey = event.pos
+                mouseClicked = True
+            
+            boxx, boxy = getBoxAtPixel(mousex, mousey)
+            if boxx != None and boxy != None: # When the mouse is over a box
+                if not revealedBoxes([boxx][boxy]):
+                    drawHighlightBox(boxx, boxy)
