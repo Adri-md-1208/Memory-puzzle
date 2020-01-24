@@ -7,6 +7,7 @@ import pygame, sys, random
 from pygame.locals import *
 
 # CONSTANTS
+#################################################################################################################################
 FPS = 30
 WINDOWHEIGHT = 480
 WINDOWWIDTH  = 640
@@ -20,6 +21,7 @@ XMARGIN = int((WINDOWWIDTH - (ROWS * (BOXSIZE + GAPSIZE))) / 2) # Divided by 2 b
 YMARGIN = int((WINDOWHEIGHT - (COLUMNS * (BOXSIZE + GAPSIZE))) / 2) 
 
 # COLORS 
+#################################################################################################################################
 #         R    G    B
 GRAY = (192, 192, 192)
 BLUE = (  0,   0, 255)
@@ -29,20 +31,28 @@ BGCOLOR = GRAY
 HIGHLIGHTCOLOR = CYAN
 BOXCOLOR = BLUE
 
+# DISPLAY
+#################################################################################################################################
 DISPLAY = pygame.display.set_mode((640, 480))
 pygame.display.set_caption('Memory puzzle!')
 
 # SPRITES 
-pokeball    = pygame.image.load('C:/Users/Adrián/Desktop/Python-games/Games/Memory/sprites/pokeball.png')
-greatball   = pygame.image.load('C:/Users/Adrián/Desktop/Python-games/Games/Memory/sprites/greatball.png')
-ultraball   = pygame.image.load('C:/Users/Adrián/Desktop/Python-games/Games/Memory/sprites/ultraball.png')
-premierball = pygame.image.load('C:/Users/Adrián/Desktop/Python-games/Games/Memory/sprites/premierball.png')
-masterball  = pygame.image.load('C:/Users/Adrián/Desktop/Python-games/Games/Memory/sprites/masterball.png')
-safariball  = pygame.image.load('C:/Users/Adrián/Desktop/Python-games/Games/Memory/sprites/safariball.png')
+#################################################################################################################################
+POKEBALL    = pygame.image.load('C:/Users/Adrián/Desktop/Python-games/Games/Memory/sprites/pokeball.png')
+GREATBALL   = pygame.image.load('C:/Users/Adrián/Desktop/Python-games/Games/Memory/sprites/greatball.png')
+ULTRABALL   = pygame.image.load('C:/Users/Adrián/Desktop/Python-games/Games/Memory/sprites/ultraball.png')
+PREMIERBALL = pygame.image.load('C:/Users/Adrián/Desktop/Python-games/Games/Memory/sprites/premierball.png')
+MASTERBALL  = pygame.image.load('C:/Users/Adrián/Desktop/Python-games/Games/Memory/sprites/masterball.png')
+SAFARIBALL  = pygame.image.load('C:/Users/Adrián/Desktop/Python-games/Games/Memory/sprites/safariball.png')
+MOONBALL    = pygame.image.load('C:/Users/Adrián/Desktop/Python-games/Games/Memory/sprites/moonball.png')
+HEAVYBALL   = pygame.image.load('C:/Users/Adrián/Desktop/Python-games/Games/Memory/sprites/heavyball.png')
 
-balls = [pokeball, greatball, ultraball, premierball, masterball, safariball]
+BALLS = (POKEBALL, GREATBALL, ULTRABALL, PREMIERBALL, MASTERBALL, SAFARIBALL, MOONBALL, HEAVYBALL)
+
+assert (len(BALLS) * 2) == (COLUMNS * ROWS), 'The number of sprites must be equal to the number of boxes' 
 
 # MAIN LOOP
+#################################################################################################################################
 while True:
 
     pygame.init()
@@ -52,12 +62,5 @@ while True:
         if event.type == QUIT:
             pygame.quit()
             sys.exit()
-
-    DISPLAY.blit(pokeball, (100, 100))
-    DISPLAY.blit(greatball, (200, 200))
-    DISPLAY.blit(ultraball, (300, 300))
-    DISPLAY.blit(premierball, (400, 400))
-    DISPLAY.blit(masterball, (400, 200))
-    DISPLAY.blit(safariball, (100, 200))
 
     pygame.display.update()
