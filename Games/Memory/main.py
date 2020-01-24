@@ -13,8 +13,8 @@ WINDOWWIDTH  = 640
 REVEALSPEED  =   8 # Time of reveal animation
 BOXSIZE      =  40
 GAPSIZE      =  10
-COLUMNS      =   6 
-ROWS         =   5
+COLUMNS      =   4 
+ROWS         =   4
 assert (COLUMNS * ROWS) % 2 == 0 , 'The number of boxes must be even'
 XMARGIN = int((WINDOWWIDTH - (ROWS * (BOXSIZE + GAPSIZE))) / 2) # Divided by 2 because XMARGIN seems the left and right margin
 YMARGIN = int((WINDOWHEIGHT - (COLUMNS * (BOXSIZE + GAPSIZE))) / 2) 
@@ -40,6 +40,8 @@ premierball = pygame.image.load('C:/Users/Adrián/Desktop/Python-games/Games/Mem
 masterball  = pygame.image.load('C:/Users/Adrián/Desktop/Python-games/Games/Memory/sprites/masterball.png')
 safariball  = pygame.image.load('C:/Users/Adrián/Desktop/Python-games/Games/Memory/sprites/safariball.png')
 
+balls = [pokeball, greatball, ultraball, premierball, masterball, safariball]
+
 # MAIN LOOP
 while True:
 
@@ -56,5 +58,6 @@ while True:
     DISPLAY.blit(ultraball, (300, 300))
     DISPLAY.blit(premierball, (400, 400))
     DISPLAY.blit(masterball, (400, 200))
+    DISPLAY.blit(safariball, (100, 200))
 
     pygame.display.update()
