@@ -85,8 +85,8 @@ def main():
                 if not revealedBoxes([boxx][boxy]):
                     drawHighlightBox(boxx, boxy)
                 if not revealedBoxes([boxx][boxy]) and mouseClicked:
-                    revealedBoxes(mainBoard, [(boxx, boxy)]) # in line
-                    revealedBoxes[boxx][boxy]
+                    revealedBoxesAnimation(mainBoard, [(boxx, boxy)]) # in line
+                    revealedBoxes[boxx][boxy] = True
                     if firstSelection == None:
                         firstSelection = (boxx, boxy) # Set the box as the first selection
                     else: # That is the second selection
