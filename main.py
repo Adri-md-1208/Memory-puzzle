@@ -10,7 +10,7 @@ from pygame.locals import *
 FPS = 30
 WINDOWHEIGHT = 480
 WINDOWWIDTH  = 640
-REVEALSPEED  =   8 # Time of reveal animation
+REVEALSPEED  =   8 # Time of reveal animation, only orientative
 BOXSIZE      =  40
 GAPSIZE      =  10 # Size between boxes
 COLUMNS      =   4 
@@ -213,6 +213,41 @@ def drawIcon(ball, boxx, boxy):
     elif ball == HEAVYBALL:
         DISPLAY.blit(heavyball, (left, top))
 
+def getBall(board, boxx, boxy):
+    '''
+    This function only return the ball that is in the position
+    '''
+    return board[boxx][boxy]
+
+def drawBoxCovers(board, boxes, cover):
+    '''
+    This function cover the icons if is needed
+    '''
+    for box in boxes:
+        left, top = positionalToCartesian(box[0], box[1])
+        pygame.draw.rect(DISPLAYSURF, BGCOLOR, (left, top, BOXSIZE, BOXSIZE))
+        ball = getBall(board, box[0], box[1])
+        drawIcon(ball, box[0], box[1])
+        if cover > 0: 
+            pygame.draw.rect(DISPLAYSURF, BOXCOLOR, (left, top, BOXSIZE, BOXSIZE))
+    pygame.display.update()
+    FPSCLOCK.tick(FPS)
+
+def revealBoxesAnimation(board, boxesToReveal):
+    '''
+    This function uses the drawBoxCovers function to reveal the boxes in order to decrease the cover paramether from
+    the maximum to a negative value (box revealed)
+    '''
+    for coverage in range(BOXSIZE, (- REVEALSPEED) - 1, - REVEALSPEED): # The minimum value to the speed must be 1
+        drawBoxCovers(board, boxesToReveal, coverage)
+
+def coverBoxesAnimation(board, boxesToCover):
+    '''
+    This function uses the drawBoxCovers function to reveal the boxes in order to increase the cover paramether from
+    the minimum to a value over the maximum (box covered)
+    '''
+    for coverage in range(0, BOXSIZE + REVEALSPEED, REVEALSPEED): # The minimum value to the speed must be 1
+        drawBoxCovers(board, boxesToCover, coverage)
 
 
 if __name__ = '__main__':
