@@ -151,5 +151,29 @@ def generateRandomizedBoard():
         board.append(column)
     return board
 
+def splitLists(step, list):
+    '''
+    This function split a list into a list of lists. The sublist have a size of step paramether
+    This function is used in the startGameAnimation() function
+    For example, the list [1, 2, 3, 4] passed with a step = 2, will return:
+        [[1, 2], [3, 4]] as the result
+    '''
+    result = []
+    for i in range(0, len(list), step):
+        result.append(list[i:i + step])
+    return result
+
+def positionalToCartesian(boxx, boxy):
+    '''
+    This function pass from the positional system ,that we are using to refer the boxes in the 2D list [boxx][boxy],
+    to a cartesian system that are refered in pixel and is useful to blit the sprites
+    The return is a tuple of left, top pixels of the box
+    '''
+    left = boxx * (BOXSIZE + GAPSIZE) + XMARGIN
+    top = boxy * (BOXSIZE + GAPSIZE) + YMARGIN
+    return (left, top)
+
+
+
 if __name__ = '__main__':
     main()
