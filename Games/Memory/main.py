@@ -57,8 +57,8 @@ def main():
 
     mousex = 0
     mousey = 0
-    mainBoard = getRandomizedBoard() # in line 
-    revealedBoxes = setRevealedBoxes(False) # in line
+    mainBoard = generateRandomizedBoard() # in line 131
+    revealedBoxes = generateRevealedBoxesData(False) # in line 117
     firstSelection = None # Boolean type variable that set if the first box was revealed
 
     DISPLAY.fill(BGCOLOR)
@@ -101,7 +101,7 @@ def main():
                             gameWonAnimation(mainBoard) # in line
                             pygame.time.wait(2000)
 
-                            mainBoard = getRandomizedBoard() # Restart the game 
+                            mainBoard = generateRandomizedBoard() # Restart the game 
                             revealedBoxes = setRevealedBoxes(False) # in line
 
                             drawBoard(mainBoard, revealedBoxes) # Show the board unrevealed
@@ -113,3 +113,43 @@ def main():
 
                         pygame.display.update()
                         FPSCLOCK.tick(FPS)
+
+def generateRevealedBoxesData(data):
+    '''
+    In that function I generate a 2 dimensional list that represents the boxes distribution over the board
+    Is something like
+      [ [][][][],
+        [][][][],
+        [][][][],
+        [][][][] ]
+        '''
+    revealedBoxes = []
+    for i in range(ROWS):
+        revealedBoxes.append([data] * COLUMNS)
+    return revealedBoxes
+
+def generateRandomizedBoard():
+    '''
+    That function return a 2 dimensional list with the icons placed in random sites
+    We use a copy of BALLS list and then duplicate them to get the pairs of icons
+    '''
+    icons = []
+    for i in BALLS:
+        icons.append(i) # That list is a copy of the BALLS list
+    random.shuffle(icons)
+
+    numberIconsUsed = int((ROWS * COLUMNS) / 2) # The number of icons that we need to use
+    icons = icons[:numberIconsUsed] * 2 # Shorting the list for taking only the number of icons that we need (now, the pair of icons)
+    random.shuffle(icons)
+    
+    board = [] # This is similar to the generateRevealedBoxesData function, but the elements are elements of the icons list
+    for i in range(ROWS):
+        column = []
+        for i in range(COLUMNS):
+            column.append(icons[0])
+            del icons[0] # Making the list short by deleting the icons that are already used
+        board.append(column)
+    return board
+
+if __name__ = '__main__':
+    main()
