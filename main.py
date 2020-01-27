@@ -7,7 +7,6 @@ import pygame, sys, random
 from pygame.locals import *
 
 # CONSTANTS
-#################################################################################################################################
 FPS = 30
 WINDOWHEIGHT = 480
 WINDOWWIDTH  = 640
@@ -21,7 +20,6 @@ XMARGIN = int((WINDOWWIDTH - (ROWS * (BOXSIZE + GAPSIZE))) / 2) # Divided by 2 b
 YMARGIN = int((WINDOWHEIGHT - (COLUMNS * (BOXSIZE + GAPSIZE))) / 2) 
 
 # COLORS 
-#################################################################################################################################
 #         R    G    B
 GRAY = (192, 192, 192)
 BLUE = (  0,   0, 255)
@@ -32,22 +30,28 @@ HIGHLIGHTCOLOR = CYAN # The color around every box
 BOXCOLOR = BLUE
 
 # SPRITES 
-#################################################################################################################################
-POKEBALL    = pygame.image.load('C:/Users/Adrián/Desktop/Python-games/Games/Memory/sprites/pokeball.png')
-GREATBALL   = pygame.image.load('C:/Users/Adrián/Desktop/Python-games/Games/Memory/sprites/greatball.png')
-ULTRABALL   = pygame.image.load('C:/Users/Adrián/Desktop/Python-games/Games/Memory/sprites/ultraball.png')
-PREMIERBALL = pygame.image.load('C:/Users/Adrián/Desktop/Python-games/Games/Memory/sprites/premierball.png')
-MASTERBALL  = pygame.image.load('C:/Users/Adrián/Desktop/Python-games/Games/Memory/sprites/masterball.png')
-SAFARIBALL  = pygame.image.load('C:/Users/Adrián/Desktop/Python-games/Games/Memory/sprites/safariball.png')
-MOONBALL    = pygame.image.load('C:/Users/Adrián/Desktop/Python-games/Games/Memory/sprites/moonball.png')
-HEAVYBALL   = pygame.image.load('C:/Users/Adrián/Desktop/Python-games/Games/Memory/sprites/heavyball.png')
+POKEBALL    = 'pokeball'
+pokeball    = pygame.image.load('C:/Users/Adrián/Desktop/Python-games/Games/Memory/sprites/pokeball.png')
+GREATBALL   = 'greatball'
+greatball   = pygame.image.load('C:/Users/Adrián/Desktop/Python-games/Games/Memory/sprites/greatball.png')
+ULTRABALL   = 'ultraball'
+ultraball   = pygame.image.load('C:/Users/Adrián/Desktop/Python-games/Games/Memory/sprites/ultraball.png')
+PREMIERBALL = 'premierball'
+premierball = pygame.image.load('C:/Users/Adrián/Desktop/Python-games/Games/Memory/sprites/premierball.png')
+MASTERBALL  = 'masterball'
+masterball  = pygame.image.load('C:/Users/Adrián/Desktop/Python-games/Games/Memory/sprites/masterball.png')
+SAFARIBALL  = 'safariball'
+safariball  = pygame.image.load('C:/Users/Adrián/Desktop/Python-games/Games/Memory/sprites/safariball.png')
+MOONBALL    = 'moonball'
+moonball    = pygame.image.load('C:/Users/Adrián/Desktop/Python-games/Games/Memory/sprites/moonball.png')
+HEAVYBALL   = 'heavyball'
+heavyball   = pygame.image.load('C:/Users/Adrián/Desktop/Python-games/Games/Memory/sprites/heavyball.png')
 
-BALLS = (POKEBALL, GREATBALL, ULTRABALL, PREMIERBALL, MASTERBALL, SAFARIBALL, MOONBALL, HEAVYBALL)
+BALLS = (pokeball, greatball, ultraball, premierball, masterball, safariball, moonball, heavyball)
 
 assert (len(BALLS) * 2) == (COLUMNS * ROWS), 'The number of sprites must be equal to the number of boxes' 
 
 # MAIN LOOP
-#################################################################################################################################
 def main():
     global FPSCLOCK, DISPLAY
     pygame.init()
@@ -57,8 +61,8 @@ def main():
 
     mousex = 0
     mousey = 0
-    mainBoard = generateRandomizedBoard() # in line 131
-    revealedBoxes = generateRevealedBoxesData(False) # in line 117
+    mainBoard = generateRandomizedBoard() # in line 127
+    revealedBoxes = generateRevealedBoxesData(False) # in line 113
     firstSelection = None # Boolean type variable that set if the first box was revealed
 
     DISPLAY.fill(BGCOLOR)
@@ -151,7 +155,7 @@ def generateRandomizedBoard():
         board.append(column)
     return board
 
-def splitLists(step, list):
+def splitList(step, list):
     '''
     This function split a list into a list of lists. The sublist have a size of step paramether
     This function is used in the startGameAnimation() function
@@ -172,6 +176,42 @@ def positionalToCartesian(boxx, boxy):
     left = boxx * (BOXSIZE + GAPSIZE) + XMARGIN
     top = boxy * (BOXSIZE + GAPSIZE) + YMARGIN
     return (left, top)
+
+def cartesianToPositional(x, y):
+    '''
+    That function is used to check if the mouse is over a box. In that case, the function return the position of the 
+    box on which is over in the 2D list positional order
+    '''
+    for boxx in range(ROWS):
+        for boxy in range(COLUMNS):
+            left, top = positionalToCartesian(boxx, boxy)
+            boxRect = pygame.Rect(left, top, BOXSIZE, BOXSIZE)
+            if boxRect.collidepoint(x, y): # That method is used to check if the x, y position is colliding with the boxRect
+                return (boxx, boxy)
+        return (None, None)
+
+def drawIcon(ball, boxx, boxy):
+    '''
+    This function draw the ball passed by argument
+    '''
+    left, top = positionalToCartesian(boxx, boxy)
+
+    if ball == POKEBALL:
+        DISPLAY.blit(pokeball, (left, top))
+    elif ball == SUPERBALL:
+        DISPLAY.blit(superball, (left, top))
+    elif ball == ULTRABALL:
+        DISPLAY.blit(ultraball, (left, top)) 
+    elif ball == PREMIERBALL:
+        DISPLAY.blit(premierball, (left, top))
+    elif ball == MASTERBALL:
+        DISPLAY.blit(masterball, (left, top))
+    elif safariball == POKEBALL:
+        DISPLAY.blit(safariball, (left, top))
+    elif ball == MOONBALL:
+        DISPLAY.blit(moonball, (left, top))
+    elif ball == HEAVYBALL:
+        DISPLAY.blit(heavyball, (left, top))
 
 
 
