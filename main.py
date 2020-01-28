@@ -49,7 +49,7 @@ moonball    = pygame.image.load('C:/Users/Adrián/Desktop/Memory-puzzle/sprites/
 HEAVYBALL   = 'heavyball'
 heavyball   = pygame.image.load('C:/Users/Adrián/Desktop/Memory-puzzle/sprites/heavyball.png')
 
-BALLS = (pokeball, greatball, ultraball, premierball, masterball, safariball, moonball, heavyball)
+BALLS = (POKEBALL, GREATBALL, ULTRABALL, PREMIERBALL, MASTERBALL, SAFARIBALL, MOONBALL, HEAVYBALL)
 
 assert (len(BALLS) * 2) == (COLUMNS * ROWS), 'The number of sprites must be equal to the number of boxes' 
 
@@ -149,15 +149,15 @@ def generateRandomizedBoard():
     random.shuffle(icons)
     
     board = [] # This is similar to the generateRevealedBoxesData function, but the elements are elements of the icons list
-    for i in range(ROWS):
+    for i in range(COLUMNS):
         column = []
-        for i in range(COLUMNS):
+        for i in range(ROWS):
             column.append(icons[0])
             del icons[0] # Making the list short by deleting the icons that are already used
         board.append(column)
     return board
 
-def splitList(step, list):
+def splitList(step, theList):
     '''
     This function split a list into a list of lists. The sublist have a size of step paramether
     This function is used in the startGameAnimation() function
@@ -165,8 +165,8 @@ def splitList(step, list):
         [[1, 2], [3, 4]] as the result
     '''
     result = []
-    for i in range(0, len(list), step):
-        result.append(list[i:i + step])
+    for i in range(0, len(theList), step):
+        result.append(theList[i:i + step])
     return result
 
 def positionalToCartesian(boxx, boxy):
@@ -282,7 +282,7 @@ def startGameAnimation(board):
     boxes = []
     for x in range(ROWS):
         for y in range(COLUMNS):
-            boxes.append((x, y))
+            boxes.append([x, y))
     random.shuffle(boxes)
     boxGroups = splitList(4, boxes) # That is for make groups of 4 boxes to show at once
 
