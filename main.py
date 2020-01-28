@@ -8,16 +8,16 @@ from pygame.locals import *
 
 # CONSTANTS
 FPS = 30
-WINDOWHEIGHT = 480
-WINDOWWIDTH  = 640
+WINDOWHEIGHT = 640
+WINDOWWIDTH  = 480
 REVEALSPEED  =   8 # Time of reveal animation, only orientative
 BOXSIZE      =  40
 GAPSIZE      =  10 # Size between boxes
 COLUMNS      =   4 
 ROWS         =   4
 assert (COLUMNS * ROWS) % 2 == 0 , 'The number of boxes must be even'
-XMARGIN = int((WINDOWWIDTH - (ROWS * (BOXSIZE + GAPSIZE))) / 2) # Divided by 2 because XMARGIN seems the left and right margin
-YMARGIN = int((WINDOWHEIGHT - (COLUMNS * (BOXSIZE + GAPSIZE))) / 2) 
+XMARGIN = int((WINDOWHEIGHT - (ROWS * (BOXSIZE + GAPSIZE))) / 2) # Divided by 2 because XMARGIN seems the left and right margin
+YMARGIN = int((WINDOWWIDTH - (COLUMNS * (BOXSIZE + GAPSIZE))) / 2) 
 
 # COLORS 
 #         R    G    B
@@ -27,7 +27,7 @@ CYAN = (  0, 255, 255)
 RED  = (255,   0,   0)
 
 BGCOLOR = GRAY
-HIGHLIGHTCOLOR = CYAN # The color around every box
+HIGHLIGHTCOLOR = CYAN # The color around a box when the mouse is over
 BOXCOLOR = BLUE
 WINCOLOR = RED
 
@@ -102,7 +102,7 @@ def main():
                             pygame.time.wait(1000) # Retard of 1 second (1000 milliseconds)
                             coverBoxesAnimation(mainBoard, [(firstSelection[0], firstSelection[1]), (boxx, boxy)])
                             revealedBoxes[firstSelection[0]][firstSelection[1]] = False
-                            revealedBoxes[boxx, boxy] = False
+                            revealedBoxes[boxx][boxy] = False
                         elif hasWon(revealedBoxes):
                             gameWonAnimation(mainBoard) # in line 292
                             pygame.time.wait(2000)
@@ -214,6 +214,8 @@ def drawIcon(ball, boxx, boxy):
         DISPLAY.blit(moonball, (left, top))
     elif ball == HEAVYBALL:
         DISPLAY.blit(heavyball, (left, top))
+    
+    pygame.display.update()
 
 def getBall(board, boxx, boxy):
     '''
@@ -262,7 +264,7 @@ def drawBoard(board, revealed):
             if not revealed[boxx][boxy]:
                 pygame.draw.rect(DISPLAY, BOXCOLOR, (left, top, BOXSIZE, BOXSIZE)) # Draw a box
             else:
-                ball = getBall(boxx, boxy)
+                ball = getBall(board, boxx, boxy)
                 drawIcon(ball, boxx, boxy) # Draw a ball
 
 def drawHighlightBox(boxx, boxy):
