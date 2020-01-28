@@ -33,21 +33,21 @@ WINCOLOR = RED
 
 # SPRITES 
 POKEBALL    = 'pokeball'
-pokeball    = pygame.image.load('C:/Users/Adrián/Desktop/Python-games/Games/Memory/sprites/pokeball.png')
+pokeball    = pygame.image.load('C:/Users/Adrián/Desktop/Memory-puzzle/sprites/pokeball.png')
 GREATBALL   = 'greatball'
-greatball   = pygame.image.load('C:/Users/Adrián/Desktop/Python-games/Games/Memory/sprites/greatball.png')
+greatball   = pygame.image.load('C:/Users/Adrián/Desktop/Memory-puzzle/sprites/greatball.png')
 ULTRABALL   = 'ultraball'
-ultraball   = pygame.image.load('C:/Users/Adrián/Desktop/Python-games/Games/Memory/sprites/ultraball.png')
+ultraball   = pygame.image.load('C:/Users/Adrián/Desktop/Memory-puzzle/sprites/ultraball.png')
 PREMIERBALL = 'premierball'
-premierball = pygame.image.load('C:/Users/Adrián/Desktop/Python-games/Games/Memory/sprites/premierball.png')
+premierball = pygame.image.load('C:/Users/Adrián/Desktop/Memory-puzzle/sprites/premierball.png')
 MASTERBALL  = 'masterball'
-masterball  = pygame.image.load('C:/Users/Adrián/Desktop/Python-games/Games/Memory/sprites/masterball.png')
+masterball  = pygame.image.load('C:/Users/Adrián/Desktop/Memory-puzzle/sprites/masterball.png')
 SAFARIBALL  = 'safariball'
-safariball  = pygame.image.load('C:/Users/Adrián/Desktop/Python-games/Games/Memory/sprites/safariball.png')
+safariball  = pygame.image.load('C:/Users/Adrián/Desktop/Memory-puzzle/sprites/safariball.png')
 MOONBALL    = 'moonball'
-moonball    = pygame.image.load('C:/Users/Adrián/Desktop/Python-games/Games/Memory/sprites/moonball.png')
+moonball    = pygame.image.load('C:/Users/Adrián/Desktop/Memory-puzzle/sprites/moonball.png')
 HEAVYBALL   = 'heavyball'
-heavyball   = pygame.image.load('C:/Users/Adrián/Desktop/Python-games/Games/Memory/sprites/heavyball.png')
+heavyball   = pygame.image.load('C:/Users/Adrián/Desktop/Memory-puzzle/sprites/heavyball.png')
 
 BALLS = (pokeball, greatball, ultraball, premierball, masterball, safariball, moonball, heavyball)
 
@@ -63,18 +63,18 @@ def main():
 
     mousex = 0
     mousey = 0
-    mainBoard = generateRandomizedBoard() # in line 127
-    revealedBoxes = generateRevealedBoxesData(False) # in line 113
+    mainBoard = generateRandomizedBoard() # in line 137
+    revealedBoxes = generateRevealedBoxesData(False) # in line 123
     firstSelection = None # Boolean type variable that set if the first box was revealed
 
     DISPLAY.fill(BGCOLOR)
-    startGameAnimation(mainBoard) # in line 
+    startGameAnimation(mainBoard) # in line 275
 
     while True:
-        mouseClicked() = False
+        mouseClicked = False
 
         DISPLAY.fill(BGCOLOR)
-        drawBoard(mainBoard, revealedBoxes) # in line 
+        drawBoard(mainBoard, revealedBoxes) # in line 254
 
         for event in pygame.event.get():
             if event.type == QUIT or (event.type == KEYUP and event.key == K_ESCAPE):
@@ -86,29 +86,29 @@ def main():
                 mousex, mousey = event.pos # Get the mouse position when the mouse is clicked
                 mouseClicked = True
             
-            boxx, boxy = getBoxAtPixel(mousex, mousey)
+            boxx, boxy = cartesianToPositional(mousex, mousey)
             if boxx != None and boxy != None: # When the mouse is over a box
-                if not revealedBoxes([boxx][boxy]):
-                    drawHighlightBox(boxx, boxy)
-                if not revealedBoxes([boxx][boxy]) and mouseClicked:
-                    revealedBoxesAnimation(mainBoard, [(boxx, boxy)]) # in line
+                if not revealedBoxes[boxx][boxy]:
+                    drawHighlightBox(boxx, boxy) # in line 268
+                if not revealedBoxes[boxx][boxy] and mouseClicked:
+                    revealedBoxesAnimation(mainBoard, [(boxx, boxy)]) # in line 238
                     revealedBoxes[boxx][boxy] = True
                     if firstSelection == None:
                         firstSelection = (boxx, boxy) # Set the box as the first selection
                     else: # That is the second selection
-                        firstIcon = getIcons(mainBoard, firstSelection[0], firstSelection[1]) # in line
-                        secondIcon = getIcons(mainBoard, boxx, boxy) # in line
+                        firstIcon = getBall(mainBoard, firstSelection[0], firstSelection[1]) # in line 218
+                        secondIcon = getBall(mainBoard, boxx, boxy) # in line 218
                         if firstIcon != secondIcon:
                             pygame.time.wait(1000) # Retard of 1 second (1000 milliseconds)
                             coverBoxesAnimation(mainBoard, [(firstSelection[0], firstSelection[1]), (boxx, boxy)])
-                            revealedBoxes(firstSelection[0], firstSelection[1]) = False
-                            revealedBoxes(boxx, boxy) = False
+                            revealedBoxes[firstSelection[0]][firstSelection[1]] = False
+                            revealedBoxes[boxx, boxy] = False
                         elif hasWon(revealedBoxes):
-                            gameWonAnimation(mainBoard) # in line
+                            gameWonAnimation(mainBoard) # in line 292
                             pygame.time.wait(2000)
 
                             mainBoard = generateRandomizedBoard() # Restart the game 
-                            revealedBoxes = setRevealedBoxes(False) # in line
+                            revealedBoxes = generateRevealedBoxesData(False) # in line 123
 
                             drawBoard(mainBoard, revealedBoxes) # Show the board unrevealed
                             pygame.display.update()
@@ -200,8 +200,8 @@ def drawIcon(ball, boxx, boxy):
 
     if ball == POKEBALL:
         DISPLAY.blit(pokeball, (left, top))
-    elif ball == SUPERBALL:
-        DISPLAY.blit(superball, (left, top))
+    elif ball == GREATBALL:
+        DISPLAY.blit(greatball, (left, top))
     elif ball == ULTRABALL:
         DISPLAY.blit(ultraball, (left, top)) 
     elif ball == PREMIERBALL:
@@ -227,15 +227,15 @@ def drawBoxCovers(board, boxes, cover):
     '''
     for box in boxes:
         left, top = positionalToCartesian(box[0], box[1])
-        pygame.draw.rect(DISPLAYSURF, BGCOLOR, (left, top, BOXSIZE, BOXSIZE))
+        pygame.draw.rect(DISPLAY, BGCOLOR, (left, top, BOXSIZE, BOXSIZE))
         ball = getBall(board, box[0], box[1])
         drawIcon(ball, box[0], box[1])
         if cover > 0: 
-            pygame.draw.rect(DISPLAYSURF, BOXCOLOR, (left, top, BOXSIZE, BOXSIZE))
+            pygame.draw.rect(DISPLAY, BOXCOLOR, (left, top, BOXSIZE, BOXSIZE))
     pygame.display.update()
     FPSCLOCK.tick(FPS)
 
-def revealBoxesAnimation(board, boxesToReveal):
+def revealedBoxesAnimation(board, boxesToReveal):
     '''
     This function uses the drawBoxCovers function to reveal the boxes in order to decrease the cover paramether from
     the maximum to a negative value (box revealed)
@@ -251,7 +251,7 @@ def coverBoxesAnimation(board, boxesToCover):
     for coverage in range(0, BOXSIZE + REVEALSPEED, REVEALSPEED): # The minimum value to the speed must be 1
         drawBoxCovers(board, boxesToCover, coverage)
 
-def drawBoard(board, covered):
+def drawBoard(board, revealed):
     '''
     That function draw the entire board with the revealed and unrevealed boxes. The function know if a box is 
     revealed by passing a list of revealed boxes as an argument
@@ -286,7 +286,7 @@ def startGameAnimation(board):
 
     drawBoard(board, coveredBoxes)
     for group in boxGroups:
-        revealBoxesAnimation(board, group)
+        revealedBoxesAnimation(board, group)
         coverBoxesAnimation(board, group)
 
 def gameWonAnimation(board):
@@ -309,5 +309,5 @@ def hasWon(revealedBoxes):
             return False
     return True
 
-if __name__ = '__main__':
+if __name__ == '__main__':
     main()
