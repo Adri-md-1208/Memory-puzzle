@@ -24,10 +24,12 @@ YMARGIN = int((WINDOWHEIGHT - (COLUMNS * (BOXSIZE + GAPSIZE))) / 2)
 GRAY = (192, 192, 192)
 BLUE = (  0,   0, 255)
 CYAN = (  0, 255, 255)
+RED  = (255,   0,   0)
 
 BGCOLOR = GRAY
 HIGHLIGHTCOLOR = CYAN # The color around every box
 BOXCOLOR = BLUE
+WINCOLOR = RED
 
 # SPRITES 
 POKEBALL    = 'pokeball'
@@ -251,7 +253,7 @@ def coverBoxesAnimation(board, boxesToCover):
 
 def drawBoard(board, covered):
     '''
-    That function draw the entire board with the revealed and unrevealed boxes. The function now if a box is 
+    That function draw the entire board with the revealed and unrevealed boxes. The function know if a box is 
     revealed by passing a list of revealed boxes as an argument
     '''
     for boxx in range(ROWS):
@@ -270,6 +272,42 @@ def drawHighlightBox(boxx, boxy):
     left, top = positionalToCartesian(boxx, boxy)
     pygame.draw.rect(DISPLAY, HIGHLIGHTCOLOR, (left - 5, top - 5, BOXSIZE + 10, BOXSIZE + 10), 4) # 4 is for the width of the line
 
+def startGameAnimation(board):
+    '''
+    This function show and cover all the boxes in groups of 4 to show the player an intuition of the icons disposition
+    '''
+    coveredBoxes = generateRevealedBoxesData(False)
+    boxes = []
+    for x in range(ROWS):
+        for y in range(COLUMNS):
+            boxes.append((x, y))
+    random.shuffle(boxes)
+    boxGroups = splitList(4, boxes) # That is for make groups of 4 boxes to show at once
+
+    drawBoard(board, coveredBoxes)
+    for group in boxGroups:
+        revealBoxesAnimation(board, group)
+        coverBoxesAnimation(board, group)
+
+def gameWonAnimation(board):
+    '''
+    This function fills the background with a different color to show that the player wins the game. 
+    Then, the game is restarted after a little break
+    '''
+    coveredBoxes = generateRevealedBoxesData(True)
+    DISPLAY.fill(WINCOLOR)
+    drawBoard(board, coveredBoxes)
+    pygame.display.update()
+    pygame.time.wait(300)
+
+def hasWon(revealedBoxes):
+    '''
+    Return True if all the boxes are uncovered
+    '''
+    for i in revealedBoxes:
+        if False in i: # The in is beacause the revealedBoxes is a list of lists
+            return False
+    return True
 
 if __name__ = '__main__':
     main()
