@@ -249,6 +249,27 @@ def coverBoxesAnimation(board, boxesToCover):
     for coverage in range(0, BOXSIZE + REVEALSPEED, REVEALSPEED): # The minimum value to the speed must be 1
         drawBoxCovers(board, boxesToCover, coverage)
 
+def drawBoard(board, covered):
+    '''
+    That function draw the entire board with the revealed and unrevealed boxes. The function now if a box is 
+    revealed by passing a list of revealed boxes as an argument
+    '''
+    for boxx in range(ROWS):
+        for boxy in range(COLUMNS):
+            left, top = positionalToCartesian(boxx, boxy)
+            if not revealed[boxx][boxy]:
+                pygame.draw.rect(DISPLAY, BOXCOLOR, (left, top, BOXSIZE, BOXSIZE)) # Draw a box
+            else:
+                ball = getBall(boxx, boxy)
+                drawIcon(ball, boxx, boxy) # Draw a ball
+
+def drawHighlightBox(boxx, boxy):
+    '''
+    This function draw a perimether around the box passed with the highlightcolor
+    '''
+    left, top = positionalToCartesian(boxx, boxy)
+    pygame.draw.rect(DISPLAY, HIGHLIGHTCOLOR, (left - 5, top - 5, BOXSIZE + 10, BOXSIZE + 10), 4) # 4 is for the width of the line
+
 
 if __name__ = '__main__':
     main()
