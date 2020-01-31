@@ -282,7 +282,7 @@ def startGameAnimation(board):
     boxes = []
     for x in range(ROWS):
         for y in range(COLUMNS):
-            boxes.append([x, y))
+            boxes.append((x, y))
     random.shuffle(boxes)
     boxGroups = splitList(4, boxes) # That is for make groups of 4 boxes to show at once
 
