@@ -7,7 +7,7 @@ import pygame, sys, random
 from pygame.locals import *
 
 # CONSTANTS
-FPS = 30
+FPS = 15
 WINDOWHEIGHT = 640
 WINDOWWIDTH  = 480
 REVEALSPEED  =   8 # Time of reveal animation, only orientative
@@ -214,8 +214,6 @@ def drawIcon(ball, boxx, boxy):
         DISPLAY.blit(moonball, (left, top))
     elif ball == HEAVYBALL:
         DISPLAY.blit(heavyball, (left, top))
-    
-    pygame.display.update()
 
 def getBall(board, boxx, boxy):
     '''
@@ -242,7 +240,7 @@ def revealedBoxesAnimation(board, boxesToReveal):
     This function uses the drawBoxCovers function to reveal the boxes in order to decrease the cover paramether from
     the maximum to a negative value (box revealed)
     '''
-    for coverage in range(BOXSIZE, (- REVEALSPEED) - 1, - REVEALSPEED): # The minimum value to the speed must be 1
+    for coverage in range(BOXSIZE, - REVEALSPEED - 1, - REVEALSPEED): # The minimum value to the speed must be 1
         drawBoxCovers(board, boxesToReveal, coverage)
 
 def coverBoxesAnimation(board, boxesToCover):
