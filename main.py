@@ -81,44 +81,44 @@ def main():
                 pygame.quit()
                 sys.exit()
             elif event.type == MOUSEMOTION:
-                mousex, mousey = event.pos # Get the mouse position
+                mousex, mousey = pygame.mouse.get_pos() # Get the mouse position
             elif event.type == MOUSEBUTTONUP:
-                mousex, mousey = event.pos # Get the mouse position when the mouse is clicked
+                mousex, mousey = pygame.mouse.get_pos() # Get the mouse position when the mouse is clicked
                 mouseClicked = True
             
-            boxx, boxy = cartesianToPositional(mousex, mousey)
-            if boxx != None and boxy != None: # When the mouse is over a box
-                if not revealedBoxes[boxx][boxy]:
-                    drawHighlightBox(boxx, boxy) # in line 268
-                if not revealedBoxes[boxx][boxy] and mouseClicked:
-                    revealedBoxesAnimation(mainBoard, [(boxx, boxy)]) # in line 238
-                    revealedBoxes[boxx][boxy] = True
-                    if firstSelection == None:
-                        firstSelection = (boxx, boxy) # Set the box as the first selection
-                    else: # That is the second selection
-                        firstIcon = getBall(mainBoard, firstSelection[0], firstSelection[1]) # in line 218
-                        secondIcon = getBall(mainBoard, boxx, boxy) # in line 218
-                        if firstIcon != secondIcon:
-                            pygame.time.wait(1000) # Retard of 1 second (1000 milliseconds)
-                            coverBoxesAnimation(mainBoard, [(firstSelection[0], firstSelection[1]), (boxx, boxy)])
-                            revealedBoxes[firstSelection[0]][firstSelection[1]] = False
-                            revealedBoxes[boxx][boxy] = False
-                        elif hasWon(revealedBoxes):
-                            gameWonAnimation(mainBoard) # in line 292
-                            pygame.time.wait(2000)
+        boxx, boxy = cartesianToPositional(mousex, mousey)
+        if boxx != None and boxy != None: # When the mouse is over a box
+            if not revealedBoxes[boxx][boxy]:
+                drawHighlightBox(boxx, boxy) # in line 268
+            if not revealedBoxes[boxx][boxy] and mouseClicked:
+                revealedBoxesAnimation(mainBoard, [(boxx, boxy)]) # in line 238
+                revealedBoxes[boxx][boxy] = True
+                if firstSelection == None:
+                    firstSelection = (boxx, boxy) # Set the box as the first selection
+                else: # That is the second selection
+                    firstIcon = getBall(mainBoard, firstSelection[0], firstSelection[1]) # in line 218
+                    secondIcon = getBall(mainBoard, boxx, boxy) # in line 218
+                    if firstIcon != secondIcon:
+                        pygame.time.wait(1000) # Retard of 1 second (1000 milliseconds)
+                        coverBoxesAnimation(mainBoard, [(firstSelection[0], firstSelection[1]), (boxx, boxy)])
+                        revealedBoxes[firstSelection[0]][firstSelection[1]] = False
+                        revealedBoxes[boxx][boxy] = False
+                    elif hasWon(revealedBoxes):
+                        gameWonAnimation(mainBoard) # in line 292
+                        pygame.time.wait(2000)
 
-                            mainBoard = generateRandomizedBoard() # Restart the game 
-                            revealedBoxes = generateRevealedBoxesData(False) # in line 123
+                        mainBoard = generateRandomizedBoard() # Restart the game 
+                        revealedBoxes = generateRevealedBoxesData(False) # in line 123
 
-                            drawBoard(mainBoard, revealedBoxes) # Show the board unrevealed
-                            pygame.display.update()
-                            pygame.time.wait(1000)
-
-                            startGameAnimation(mainBoard)
-                        firstSelection = None
-
+                        drawBoard(mainBoard, revealedBoxes) # Show the board unrevealed
                         pygame.display.update()
-                        FPSCLOCK.tick(FPS)
+                        pygame.time.wait(1000)
+
+                        startGameAnimation(mainBoard)
+                    firstSelection = None
+
+        pygame.display.update()
+        FPSCLOCK.tick(FPS)
 
 def generateRevealedBoxesData(data):
     '''
