@@ -8,16 +8,16 @@ from pygame.locals import *
 
 # CONSTANTS
 FPS = 15
-WINDOWHEIGHT = 640
-WINDOWWIDTH  = 480
+WINDOWHEIGHT = 480
+WINDOWWIDTH  = 640
 REVEALSPEED  =   8 # Time of reveal animation, only orientative
 BOXSIZE      =  40
 GAPSIZE      =  10 # Size between boxes
 COLUMNS      =   4 
 ROWS         =   4
 assert (COLUMNS * ROWS) % 2 == 0 , 'The number of boxes must be even'
-XMARGIN = int((WINDOWHEIGHT - (ROWS * (BOXSIZE + GAPSIZE))) / 2) # Divided by 2 because XMARGIN seems the left and right margin
-YMARGIN = int((WINDOWWIDTH - (COLUMNS * (BOXSIZE + GAPSIZE))) / 2) 
+XMARGIN = int((WINDOWWIDTH - (COLUMNS * (BOXSIZE + GAPSIZE))) / 2) # Divided by 2 because XMARGIN seems the left and right margin
+YMARGIN = int((WINDOWHEIGHT - (ROWS * (BOXSIZE + GAPSIZE))) / 2) 
 
 # COLORS 
 #         R    G    B
@@ -58,7 +58,7 @@ def main():
     global FPSCLOCK, DISPLAY
     pygame.init()
     FPSCLOCK = pygame.time.Clock()
-    DISPLAY = pygame.display.set_mode((WINDOWHEIGHT, WINDOWWIDTH))
+    DISPLAY = pygame.display.set_mode((WINDOWWIDTH, WINDOWHEIGHT))
     pygame.display.set_caption('Memory puzzle [pokeball version]')
 
     mousex = 0
@@ -81,9 +81,9 @@ def main():
                 pygame.quit()
                 sys.exit()
             elif event.type == MOUSEMOTION:
-                mousex, mousey = pygame.mouse.get_pos() # Get the mouse position
+                mousex, mousey = event.pos # Get the mouse position
             elif event.type == MOUSEBUTTONUP:
-                mousex, mousey = pygame.mouse.get_pos() # Get the mouse position when the mouse is clicked
+                mousex, mousey = event.pos # Get the mouse position when the mouse is clicked
                 mouseClicked = True
             
         boxx, boxy = cartesianToPositional(mousex, mousey)
@@ -130,8 +130,8 @@ def generateRevealedBoxesData(data):
         [][][][] ]
         '''
     revealedBoxes = []
-    for i in range(ROWS):
-        revealedBoxes.append([data] * COLUMNS)
+    for i in range(COLUMNS):
+        revealedBoxes.append([data] * ROWS)
     return revealedBoxes
 
 def generateRandomizedBoard():
@@ -184,8 +184,8 @@ def cartesianToPositional(x, y):
     That function is used to check if the mouse is over a box. In that case, the function return the position of the 
     box on which is over in the 2D list positional order
     '''
-    for boxx in range(ROWS):
-        for boxy in range(COLUMNS):
+    for boxx in range(COLUMNS):
+        for boxy in range(ROWS):
             left, top = positionalToCartesian(boxx, boxy)
             boxRect = pygame.Rect(left, top, BOXSIZE, BOXSIZE)
             if boxRect.collidepoint(x, y): # That method is used to check if the x, y position is colliding with the boxRect
@@ -256,8 +256,8 @@ def drawBoard(board, revealed):
     That function draw the entire board with the revealed and unrevealed boxes. The function know if a box is 
     revealed by passing a list of revealed boxes as an argument
     '''
-    for boxx in range(ROWS):
-        for boxy in range(COLUMNS):
+    for boxx in range(COLUMNS):
+        for boxy in range(ROWS):
             left, top = positionalToCartesian(boxx, boxy)
             if not revealed[boxx][boxy]:
                 pygame.draw.rect(DISPLAY, BOXCOLOR, (left, top, BOXSIZE, BOXSIZE)) # Draw a box
@@ -278,8 +278,8 @@ def startGameAnimation(board):
     '''
     coveredBoxes = generateRevealedBoxesData(False)
     boxes = []
-    for x in range(ROWS):
-        for y in range(COLUMNS):
+    for x in range(COLUMNS):
+        for y in range(ROWS):
             boxes.append((x, y))
     random.shuffle(boxes)
     boxGroups = splitList(4, boxes) # That is for make groups of 4 boxes to show at once
