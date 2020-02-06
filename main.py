@@ -149,9 +149,9 @@ def generateRandomizedBoard():
     random.shuffle(icons)
     
     board = [] # This is similar to the generateRevealedBoxesData function, but the elements are elements of the icons list
-    for i in range(COLUMNS):
+    for x in range(COLUMNS):
         column = []
-        for i in range(ROWS):
+        for y in range(ROWS):
             column.append(icons[0])
             del icons[0] # Making the list short by deleting the icons that are already used
         board.append(column)
