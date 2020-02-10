@@ -33,21 +33,21 @@ WINCOLOR = RED
 
 # SPRITES 
 POKEBALL    = 'pokeball'
-pokeball    = pygame.image.load('sprites/pokeball.png')
+pokeball    = pygame.image.load('MemoryPuzzle-1.0/sprites/pokeball.png')
 GREATBALL   = 'greatball'
-greatball   = pygame.image.load('sprites/greatball.png')
+greatball   = pygame.image.load('MemoryPuzzle-1.0/sprites/greatball.png')
 ULTRABALL   = 'ultraball'
-ultraball   = pygame.image.load('sprites/ultraball.png')
+ultraball   = pygame.image.load('MemoryPuzzle-1.0/sprites/ultraball.png')
 PREMIERBALL = 'premierball'
-premierball = pygame.image.load('sprites/premierball.png')
+premierball = pygame.image.load('MemoryPuzzle-1.0/sprites/premierball.png')
 MASTERBALL  = 'masterball'
-masterball  = pygame.image.load('sprites/masterball.png')
+masterball  = pygame.image.load('MemoryPuzzle-1.0/sprites/masterball.png')
 SAFARIBALL  = 'safariball'
-safariball  = pygame.image.load('sprites/safariball.png')
+safariball  = pygame.image.load('MemoryPuzzle-1.0/sprites/safariball.png')
 MOONBALL    = 'moonball'
-moonball    = pygame.image.load('sprites/moonball.png')
+moonball    = pygame.image.load('MemoryPuzzle-1.0/sprites/moonball.png')
 HEAVYBALL   = 'heavyball'
-heavyball   = pygame.image.load('sprites/heavyball.png')
+heavyball   = pygame.image.load('MemoryPuzzle-1.0/sprites/heavyball.png')
 
 BALLS = (POKEBALL, GREATBALL, ULTRABALL, PREMIERBALL, MASTERBALL, SAFARIBALL, MOONBALL, HEAVYBALL)
 
