@@ -213,7 +213,7 @@ def drawIcon(ball, boxx, boxy):
     elif ball == MASTERBALL:
         DISPLAY.blit(masterball, (left, top))
         pygame.display.update()
-    elif safariball == POKEBALL:
+    elif ball == SAFARIBALL:
         DISPLAY.blit(safariball, (left, top))
         pygame.display.update()
     elif ball == MOONBALL:
