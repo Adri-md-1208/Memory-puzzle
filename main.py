@@ -7,7 +7,7 @@ import pygame, sys, random
 from pygame.locals import *
 
 # CONSTANTS
-FPS = 15
+FPS = 30
 WINDOWHEIGHT = 480
 WINDOWWIDTH  = 640
 REVEALSPEED  =   8 # Time of reveal animation, only orientative
@@ -190,7 +190,7 @@ def cartesianToPositional(x, y):
             boxRect = pygame.Rect(left, top, BOXSIZE, BOXSIZE)
             if boxRect.collidepoint(x, y): # That method is used to check if the x, y position is colliding with the boxRect
                 return (boxx, boxy)
-        return (None, None)
+    return (None, None)
 
 def drawIcon(ball, boxx, boxy):
     '''
