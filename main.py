@@ -99,11 +99,11 @@ def main():
                     firstIcon = getBall(mainBoard, firstSelection[0], firstSelection[1]) # in line 218
                     secondIcon = getBall(mainBoard, boxx, boxy) # in line 218
                     if firstIcon != secondIcon:
-                        pygame.time.wait(1000) # Retard of 1 second (1000 milliseconds)
+                        pygame.time.wait(500) # Retard of 0'5 seconds (500 milliseconds)
                         coverBoxesAnimation(mainBoard, [(firstSelection[0], firstSelection[1]), (boxx, boxy)])
                         revealedBoxes[firstSelection[0]][firstSelection[1]] = False
                         revealedBoxes[boxx][boxy] = False
-                    elif hasWon(revealedBoxes):
+                    elif hasWon(revealedBoxes): 
                         gameWonAnimation(mainBoard) # in line 292
                         pygame.time.wait(2000)
 
@@ -200,20 +200,28 @@ def drawIcon(ball, boxx, boxy):
 
     if ball == POKEBALL:
         DISPLAY.blit(pokeball, (left, top))
+        pygame.display.update()
     elif ball == GREATBALL:
         DISPLAY.blit(greatball, (left, top))
+        pygame.display.update()
     elif ball == ULTRABALL:
         DISPLAY.blit(ultraball, (left, top)) 
+        pygame.display.update()
     elif ball == PREMIERBALL:
         DISPLAY.blit(premierball, (left, top))
+        pygame.display.update()
     elif ball == MASTERBALL:
         DISPLAY.blit(masterball, (left, top))
+        pygame.display.update()
     elif safariball == POKEBALL:
         DISPLAY.blit(safariball, (left, top))
+        pygame.display.update()
     elif ball == MOONBALL:
         DISPLAY.blit(moonball, (left, top))
+        pygame.display.update()
     elif ball == HEAVYBALL:
         DISPLAY.blit(heavyball, (left, top))
+        pygame.display.update()
 
 def getBall(board, boxx, boxy):
     '''
@@ -240,7 +248,7 @@ def revealedBoxesAnimation(board, boxesToReveal):
     This function uses the drawBoxCovers function to reveal the boxes in order to decrease the cover paramether from
     the maximum to a negative value (box revealed)
     '''
-    for coverage in range(BOXSIZE, - REVEALSPEED - 1, - REVEALSPEED): # The minimum value to the speed must be 1
+    for coverage in range(BOXSIZE, (- REVEALSPEED) - 1, - REVEALSPEED): # The minimum value to the speed must be 1
         drawBoxCovers(board, boxesToReveal, coverage)
 
 def coverBoxesAnimation(board, boxesToCover):
