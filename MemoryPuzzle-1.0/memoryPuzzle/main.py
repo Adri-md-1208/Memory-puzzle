@@ -10,7 +10,7 @@ from pygame.locals import *
 FPS = 30
 WINDOWHEIGHT = 480
 WINDOWWIDTH  = 640
-REVEALSPEED  =   8 # Time of reveal animation, only orientative
+REVEALSPEED  =   1 # Time of reveal animation, only orientative
 BOXSIZE      =  40
 GAPSIZE      =  10 # Size between boxes
 COLUMNS      =   4 
