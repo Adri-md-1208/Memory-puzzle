@@ -8,7 +8,11 @@ setup (
     author = "Adri-md-1208", 
     author_email = "a.morales.2019@alumnos.urjc.es",
     url = "https://github.com/Adri-md-1208/Memory-puzzle",
-    packages = ["memoryPuzzle", "sprites"],
+    packages = [
+                "MemoryPuzzle-1.0",
+                "MemoryPuzzle-1.0.memoryPuzzle",
+                "MemoryPuzzle-1.0.sprites"
+                ],
     license = "GPLv3",
     
 )
