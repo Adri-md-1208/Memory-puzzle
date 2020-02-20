@@ -13,7 +13,7 @@ setup (
     author_email = "a.morales.2019@alumnos.urjc.es",
     url = "https://github.com/Adri-md-1208/Memory-puzzle",
     install_requeries = ["pygame"],
-    packages = ["memoryPuzzle", "sprites"],
+    packages = ["memoryPuzzle", "memoryPuzzle.sprites"],
     license = "GPLv3",
     
 )
