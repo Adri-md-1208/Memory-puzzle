@@ -5,6 +5,10 @@
 
 import pygame, sys, random 
 from pygame.locals import *
+
+from utils import splitList, scaleImages
+
+
 # CONSTANTS
 FPS = 30
 WINDOWHEIGHT = 480
@@ -32,23 +36,25 @@ WINCOLOR = RED
 
 # SPRITES 
 POKEBALL    = 'pokeball'
-pokeball    = pygame.image.load('memoryPuzzle/sprites/pokeball.png')
+pokeball    = pygame.image.load('c:/Users/Adrián/Desktop/Memory-puzzle/MemoryPuzzle-1.0/memoryPuzzle/sprites/pokeball.png')
 GREATBALL   = 'greatball'
-greatball   = pygame.image.load('memoryPuzzle/sprites/greatball.png')
+greatball   = pygame.image.load('c:/Users/Adrián/Desktop/Memory-puzzle/MemoryPuzzle-1.0/memoryPuzzle/sprites/greatball.png')
 ULTRABALL   = 'ultraball'
-ultraball   = pygame.image.load('memoryPuzzle/sprites/ultraball.png')
+ultraball   = pygame.image.load('c:/Users/Adrián/Desktop/Memory-puzzle/MemoryPuzzle-1.0/memoryPuzzle/sprites/ultraball.png')
 PREMIERBALL = 'premierball'
-premierball = pygame.image.load('memoryPuzzle/sprites/premierball.png')
+premierball = pygame.image.load('c:/Users/Adrián/Desktop/Memory-puzzle/MemoryPuzzle-1.0/memoryPuzzle/sprites/premierball.png')
 MASTERBALL  = 'masterball'
-masterball  = pygame.image.load('memoryPuzzle/sprites/masterball.png')
+masterball  = pygame.image.load('c:/Users/Adrián/Desktop/Memory-puzzle/MemoryPuzzle-1.0/memoryPuzzle/sprites/masterball.png')
 SAFARIBALL  = 'safariball'
-safariball  = pygame.image.load('memoryPuzzle/sprites/safariball.png')
+safariball  = pygame.image.load('c:/Users/Adrián/Desktop/Memory-puzzle/MemoryPuzzle-1.0/memoryPuzzle/sprites/safariball.png')
 MOONBALL    = 'moonball'
-moonball    = pygame.image.load('memoryPuzzle/sprites/moonball.png')
+moonball    = pygame.image.load('c:/Users/Adrián/Desktop/Memory-puzzle/MemoryPuzzle-1.0/memoryPuzzle/sprites/moonball.png')
 HEAVYBALL   = 'heavyball'
-heavyball   = pygame.image.load('memoryPuzzle/sprites/heavyball.png')
+heavyball   = pygame.image.load('c:/Users/Adrián/Desktop/Memory-puzzle/MemoryPuzzle-1.0/memoryPuzzle/sprites/heavyball.png')
 
-BALLS = (POKEBALL, GREATBALL, ULTRABALL, PREMIERBALL, MASTERBALL, SAFARIBALL, MOONBALL, HEAVYBALL)
+BALLS =   [POKEBALL, GREATBALL, ULTRABALL, PREMIERBALL, MASTERBALL, SAFARIBALL, MOONBALL, HEAVYBALL]
+SPRITES = [pokeball, greatball, ultraball, premierball, masterball, safariball , moonball, heavyball]
+scaleImages(SPRITES, (40, 40))
 
 assert (len(BALLS) * 2) == (COLUMNS * ROWS), 'The number of sprites must be equal to the number of boxes' 
 
@@ -115,20 +121,6 @@ def main():
         pygame.display.update()
         FPSCLOCK.tick(FPS)
 
-def generateRevealedBoxesData(data):
-    '''
-    In that function I generate a 2 dimensional list that represents the boxes distribution over the board
-    Is something like
-      [ [][][][],
-        [][][][],
-        [][][][],
-        [][][][] ]
-        '''
-    revealedBoxes = []
-    for i in range(COLUMNS):
-        revealedBoxes.append([data] * ROWS)
-    return revealedBoxes
-
 def generateRandomizedBoard():
     '''
     That function return a 2 dimensional list with the icons placed in random sites
@@ -152,17 +144,19 @@ def generateRandomizedBoard():
         board.append(column)
     return board
 
-def splitList(step, theList):
+def generateRevealedBoxesData(data):
     '''
-    This function split a list into a list of lists. The sublist have a size of step paramether
-    This function is used in the startGameAnimation() function
-    For example, the list [1, 2, 3, 4] passed with a step = 2, will return:
-        [[1, 2], [3, 4]] as the result
-    '''
-    result = []
-    for i in range(0, len(theList), step):
-        result.append(theList[i:i + step])
-    return result
+    In that function I generate a 2 dimensional list that represents the boxes distribution over the board
+    Is something like
+      [ [][][][],
+        [][][][],
+        [][][][],
+        [][][][] ]
+        '''
+    revealedBoxes = []
+    for i in range(COLUMNS):
+        revealedBoxes.append([data] * ROWS)
+    return revealedBoxes
 
 def positionalToCartesian(boxx, boxy):
     '''
@@ -194,7 +188,7 @@ def drawIcon(ball, boxx, boxy):
     left, top = positionalToCartesian(boxx, boxy)
 
     if ball == POKEBALL:
-        DISPLAY.blit(pokeball, (left, top))
+        DISPLAY.blit(SPRITES[0], (left, top))
     elif ball == GREATBALL:
         DISPLAY.blit(greatball, (left, top))
     elif ball == ULTRABALL:
