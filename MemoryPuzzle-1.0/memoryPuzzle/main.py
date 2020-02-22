@@ -6,33 +6,9 @@
 import pygame, sys, random 
 from pygame.locals import *
 
-from utils import splitList, scaleImage
+from constants import *
+from utils import splitList, scaleImage, positionalToCartesian, cartesianToPositional
 
-
-# CONSTANTS
-FPS = 30
-WINDOWHEIGHT = 480
-WINDOWWIDTH  = 640
-REVEALSPEED  =   6 # Time of reveal animation, only orientative
-BOXSIZE      =  40
-GAPSIZE      =  10 # Size between boxes
-COLUMNS      =   4 
-ROWS         =   4
-assert (COLUMNS * ROWS) % 2 == 0 , 'The number of boxes must be even'
-XMARGIN = int((WINDOWWIDTH - (COLUMNS * (BOXSIZE + GAPSIZE))) / 2) # Divided by 2 because XMARGIN seems the left and right margin
-YMARGIN = int((WINDOWHEIGHT - (ROWS * (BOXSIZE + GAPSIZE))) / 2) 
-
-# COLORS 
-#         R    G    B
-GRAY = (192, 192, 192)
-BLUE = (  0,   0, 255)
-CYAN = (  0, 255, 255)
-RED  = (255,   0,   0)
-
-BGCOLOR = GRAY
-HIGHLIGHTCOLOR = CYAN # The color around a box when the mouse is over
-BOXCOLOR = BLUE
-WINCOLOR = RED
 
 # SPRITES 
 POKEBALL    = 'pokeball'
@@ -155,29 +131,6 @@ def generateRevealedBoxesData(data):
     for i in range(COLUMNS):
         revealedBoxes.append([data] * ROWS)
     return revealedBoxes
-
-def positionalToCartesian(boxx, boxy):
-    '''
-    This function pass from the positional system ,that we are using to refer the boxes in the 2D list [boxx][boxy],
-    to a cartesian system that are refered in pixel and is useful to blit the sprites
-    The return is a tuple of left, top pixels of the box
-    '''
-    left = boxx * (BOXSIZE + GAPSIZE) + XMARGIN
-    top = boxy * (BOXSIZE + GAPSIZE) + YMARGIN
-    return (left, top)
-
-def cartesianToPositional(x, y):
-    '''
-    That function is used to check if the mouse is over a box. In that case, the function return the position of the 
-    box on which is over in the 2D list positional order
-    '''
-    for boxx in range(COLUMNS):
-        for boxy in range(ROWS):
-            left, top = positionalToCartesian(boxx, boxy)
-            boxRect = pygame.Rect(left, top, BOXSIZE, BOXSIZE)
-            if boxRect.collidepoint(x, y): # That method is used to check if the x, y position is colliding with the boxRect
-                return (boxx, boxy)
-    return (None, None)
 
 def drawIcon(ball, boxx, boxy):
     '''

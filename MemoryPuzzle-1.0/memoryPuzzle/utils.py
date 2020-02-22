@@ -4,6 +4,7 @@
 # Released under a "GPLv3" license
 
 import pygame
+from constants import *
 
 def splitList(step, theList):
     '''
@@ -23,3 +24,26 @@ def scaleImage(image, size):
     Be aware because the output will be another image
     '''
     return pygame.transform.scale(image, size)
+
+def positionalToCartesian(boxx, boxy):
+    '''
+    This function pass from the positional system ,that we are using to refer the boxes in the 2D list [boxx][boxy],
+    to a cartesian system that are refered in pixel and is useful to blit the sprites
+    The return is a tuple of left, top pixels of the box
+    '''
+    left = boxx * (BOXSIZE + GAPSIZE) + XMARGIN
+    top = boxy * (BOXSIZE + GAPSIZE) + YMARGIN
+    return (left, top)
+
+def cartesianToPositional(x, y):
+    '''
+    That function is used to check if the mouse is over a box. In that case, the function return the position of the 
+    box on which is over in the 2D list positional order
+    '''
+    for boxx in range(COLUMNS):
+        for boxy in range(ROWS):
+            left, top = positionalToCartesian(boxx, boxy)
+            boxRect = pygame.Rect(left, top, BOXSIZE, BOXSIZE)
+            if boxRect.collidepoint(x, y): # That method is used to check if the x, y position is colliding with the boxRect
+                return (boxx, boxy)
+    return (None, None)
