@@ -6,7 +6,7 @@
 import pygame, sys, random 
 from pygame.locals import *
 
-from utils import splitList, scaleImages
+from utils import splitList, scaleImage
 
 
 # CONSTANTS
@@ -36,25 +36,23 @@ WINCOLOR = RED
 
 # SPRITES 
 POKEBALL    = 'pokeball'
-pokeball    = pygame.image.load('c:/Users/Adrián/Desktop/Memory-puzzle/MemoryPuzzle-1.0/memoryPuzzle/sprites/pokeball.png')
+pokeball    = scaleImage(pygame.image.load('c:/Users/Adrián/Desktop/Memory-puzzle/MemoryPuzzle-1.0/memoryPuzzle/sprites/pokeball.png'), (BOXSIZE, BOXSIZE))
 GREATBALL   = 'greatball'
-greatball   = pygame.image.load('c:/Users/Adrián/Desktop/Memory-puzzle/MemoryPuzzle-1.0/memoryPuzzle/sprites/greatball.png')
+greatball   = scaleImage(pygame.image.load('c:/Users/Adrián/Desktop/Memory-puzzle/MemoryPuzzle-1.0/memoryPuzzle/sprites/greatball.png'), (BOXSIZE, BOXSIZE))
 ULTRABALL   = 'ultraball'
-ultraball   = pygame.image.load('c:/Users/Adrián/Desktop/Memory-puzzle/MemoryPuzzle-1.0/memoryPuzzle/sprites/ultraball.png')
+ultraball   = scaleImage(pygame.image.load('c:/Users/Adrián/Desktop/Memory-puzzle/MemoryPuzzle-1.0/memoryPuzzle/sprites/ultraball.png'), (BOXSIZE, BOXSIZE))
 PREMIERBALL = 'premierball'
-premierball = pygame.image.load('c:/Users/Adrián/Desktop/Memory-puzzle/MemoryPuzzle-1.0/memoryPuzzle/sprites/premierball.png')
+premierball = scaleImage(pygame.image.load('c:/Users/Adrián/Desktop/Memory-puzzle/MemoryPuzzle-1.0/memoryPuzzle/sprites/premierball.png'), (BOXSIZE, BOXSIZE))
 MASTERBALL  = 'masterball'
-masterball  = pygame.image.load('c:/Users/Adrián/Desktop/Memory-puzzle/MemoryPuzzle-1.0/memoryPuzzle/sprites/masterball.png')
+masterball  = scaleImage(pygame.image.load('c:/Users/Adrián/Desktop/Memory-puzzle/MemoryPuzzle-1.0/memoryPuzzle/sprites/masterball.png'), (BOXSIZE, BOXSIZE))
 SAFARIBALL  = 'safariball'
-safariball  = pygame.image.load('c:/Users/Adrián/Desktop/Memory-puzzle/MemoryPuzzle-1.0/memoryPuzzle/sprites/safariball.png')
+safariball  = scaleImage(pygame.image.load('c:/Users/Adrián/Desktop/Memory-puzzle/MemoryPuzzle-1.0/memoryPuzzle/sprites/safariball.png'), (BOXSIZE, BOXSIZE))
 MOONBALL    = 'moonball'
-moonball    = pygame.image.load('c:/Users/Adrián/Desktop/Memory-puzzle/MemoryPuzzle-1.0/memoryPuzzle/sprites/moonball.png')
+moonball    = scaleImage(pygame.image.load('c:/Users/Adrián/Desktop/Memory-puzzle/MemoryPuzzle-1.0/memoryPuzzle/sprites/moonball.png'), (BOXSIZE, BOXSIZE))
 HEAVYBALL   = 'heavyball'
-heavyball   = pygame.image.load('c:/Users/Adrián/Desktop/Memory-puzzle/MemoryPuzzle-1.0/memoryPuzzle/sprites/heavyball.png')
+heavyball   = scaleImage(pygame.image.load('c:/Users/Adrián/Desktop/Memory-puzzle/MemoryPuzzle-1.0/memoryPuzzle/sprites/heavyball.png'), (BOXSIZE, BOXSIZE))
 
 BALLS =   [POKEBALL, GREATBALL, ULTRABALL, PREMIERBALL, MASTERBALL, SAFARIBALL, MOONBALL, HEAVYBALL]
-SPRITES = [pokeball, greatball, ultraball, premierball, masterball, safariball , moonball, heavyball]
-scaleImages(SPRITES, (40, 40))
 
 assert (len(BALLS) * 2) == (COLUMNS * ROWS), 'The number of sprites must be equal to the number of boxes' 
 
@@ -188,7 +186,7 @@ def drawIcon(ball, boxx, boxy):
     left, top = positionalToCartesian(boxx, boxy)
 
     if ball == POKEBALL:
-        DISPLAY.blit(SPRITES[0], (left, top))
+        DISPLAY.blit(pokeball, (left, top))
     elif ball == GREATBALL:
         DISPLAY.blit(greatball, (left, top))
     elif ball == ULTRABALL:
@@ -287,7 +285,7 @@ def gameWonAnimation(board):
     DISPLAY.fill(WINCOLOR)
     drawBoard(board, coveredBoxes)
     pygame.display.update()
-    pygame.time.wait(300)
+    pygame.time.wait(3000)
 
 def hasWon(revealedBoxes):
     '''

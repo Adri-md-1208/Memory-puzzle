@@ -17,10 +17,9 @@ def splitList(step, theList):
         result.append(theList[i:i + step])
     return result
 
-def scaleImages(images, size):
+def scaleImage(image, size):
     '''
     This function scale a group of image to the size specified
     Be aware because the output will be another image
     '''
-    for i in range(len(images)):
-        images[i] = pygame.transform.scale(images[i], size)
+    return pygame.transform.scale(image, size)
