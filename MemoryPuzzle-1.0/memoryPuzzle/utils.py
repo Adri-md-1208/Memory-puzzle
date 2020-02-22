@@ -47,3 +47,12 @@ def cartesianToPositional(x, y):
             if boxRect.collidepoint(x, y): # That method is used to check if the x, y position is colliding with the boxRect
                 return (boxx, boxy)
     return (None, None)
+
+def hasWon(revealedBoxes):
+    '''
+    Return True if all the boxes are uncovered
+    '''
+    for i in revealedBoxes:
+        if False in i: # The in is beacause the revealedBoxes is a list of lists
+            return False
+    return True
