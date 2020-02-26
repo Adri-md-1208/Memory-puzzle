@@ -6,7 +6,7 @@
 import pygame, sys, random 
 from pygame.locals import *
 
-from constants import * 
+import constants as cts 
 from board import generateRevealedBoxesData, generateRandomizedBoard, drawBoard, getBall
 from animations import startGameAnimation, drawHighlightBox, revealedBoxesAnimation, coverBoxesAnimation, gameWonAnimation
 from utils import cartesianToPositional, hasWon
@@ -16,7 +16,7 @@ def main():
     global FPSCLOCK, DISPLAY
     pygame.init()
     FPSCLOCK = pygame.time.Clock()
-    DISPLAY = pygame.display.set_mode((WINDOWWIDTH, WINDOWHEIGHT))
+    DISPLAY = pygame.display.set_mode((cts.WINDOWWIDTH, cts.WINDOWHEIGHT))
     pygame.display.set_caption('Memory puzzle [pokeball version]')
 
     mousex = 0
@@ -25,13 +25,13 @@ def main():
     revealedBoxes = generateRevealedBoxesData(False)
     firstSelection = None # Boolean type variable that set if the first box was revealed
 
-    DISPLAY.fill(BGCOLOR)
+    DISPLAY.fill(cts.BGCOLOR)
     startGameAnimation(mainBoard)
 
     while True:
         mouseClicked = False
 
-        DISPLAY.fill(BGCOLOR)
+        DISPLAY.fill(cts.BGCOLOR)
         drawBoard(mainBoard, revealedBoxes)
 
         for event in pygame.event.get():
@@ -72,7 +72,7 @@ def main():
                     firstSelection = None
 
         pygame.display.update()
-        FPSCLOCK.tick(FPS)
+        FPSCLOCK.tick(cts.FPS)
 
 if __name__ == '__main__':
     main()

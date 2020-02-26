@@ -3,10 +3,11 @@
 # E-mail : a.morales.2019@alummos.urjc.es
 # Released under a "GPLv3" license
 
-import random
+import random, pygame
 
-from constants import *
+import constants as cts
 from utils import positionalToCartesian
+from main import DISPLAY
 
 def generateRevealedBoxesData(data):
     '''
@@ -18,8 +19,8 @@ def generateRevealedBoxesData(data):
         [][][][] ]
         '''
     revealedBoxes = []
-    for i in range(COLUMNS):
-        revealedBoxes.append([data] * ROWS)
+    for i in range(cts.COLUMNS):
+        revealedBoxes.append([data] * cts.ROWS)
     return revealedBoxes
 
 def generateRandomizedBoard():
@@ -28,18 +29,18 @@ def generateRandomizedBoard():
     We use a copy of BALLS list and then duplicate them to get the pairs of icons
     '''
     icons = []
-    for i in BALLS:
+    for i in cts.BALLS:
         icons.append(i) # That list is a copy of the BALLS list
     random.shuffle(icons)
 
-    numberIconsUsed = int((ROWS * COLUMNS) / 2) # The number of icons that we need to use
+    numberIconsUsed = int((cts.ROWS * cts.COLUMNS) / 2) # The number of icons that we need to use
     icons = icons[:numberIconsUsed] * 2 # Shorting the list for taking only the number of icons that we need (now, the pair of icons)
     random.shuffle(icons)
     
     board = [] # This is similar to the generateRevealedBoxesData function, but the elements are elements of the icons list
-    for x in range(COLUMNS):
+    for x in range(cts.COLUMNS):
         column = []
-        for y in range(ROWS):
+        for y in range(cts.ROWS):
             column.append(icons[0])
             del icons[0] # Making the list short by deleting the icons that are already used
         board.append(column)
@@ -50,11 +51,11 @@ def drawBoard(board, revealed):
     That function draw the entire board with the revealed and unrevealed boxes. The function know if a box is 
     revealed by passing a list of revealed boxes as an argument
     '''
-    for boxx in range(COLUMNS):
-        for boxy in range(ROWS):
+    for boxx in range(cts.COLUMNS):
+        for boxy in range(cts.ROWS):
             left, top = positionalToCartesian(boxx, boxy)
             if not revealed[boxx][boxy]:
-                pygame.draw.rect(DISPLAY, BOXCOLOR, (left, top, BOXSIZE, BOXSIZE)) # Draw a box
+                pygame.draw.rect(DISPLAY, cts.BOXCOLOR, (left, top, cts.BOXSIZE, cts.BOXSIZE)) # Draw a box
             else:
                 ball = getBall(board, boxx, boxy)
                 drawIcon(ball, boxx, boxy) # Draw a ball

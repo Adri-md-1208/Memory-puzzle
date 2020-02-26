@@ -5,7 +5,7 @@
 
 import pygame, random
 
-from constants import *
+import constants as cts
 from board import generateRevealedBoxesData, drawBoard
 from utils import positionalToCartesian, splitList
 
@@ -15,21 +15,21 @@ def drawIcon(ball, boxx, boxy):
     '''
     left, top = positionalToCartesian(boxx, boxy)
 
-    if ball == POKEBALL:
+    if ball == cts.POKEBALL:
         DISPLAY.blit(pokeball, (left, top))
-    elif ball == GREATBALL:
+    elif ball == cts.GREATBALL:
         DISPLAY.blit(greatball, (left, top))
-    elif ball == ULTRABALL:
+    elif ball == cts.ULTRABALL:
         DISPLAY.blit(ultraball, (left, top)) 
-    elif ball == PREMIERBALL:
+    elif ball == cts.PREMIERBALL:
         DISPLAY.blit(premierball, (left, top))
-    elif ball == MASTERBALL:
+    elif ball == cts.MASTERBALL:
         DISPLAY.blit(masterball, (left, top))
-    elif ball == SAFARIBALL:
+    elif ball == cts.SAFARIBALL:
         DISPLAY.blit(safariball, (left, top))
-    elif ball == MOONBALL:
+    elif ball == cts.MOONBALL:
         DISPLAY.blit(moonball, (left, top))
-    elif ball == HEAVYBALL:
+    elif ball == cts.HEAVYBALL:
         DISPLAY.blit(heavyball, (left, top))
 
 def drawBoxCovers(board, boxes, cover):
@@ -38,11 +38,11 @@ def drawBoxCovers(board, boxes, cover):
     '''
     for box in boxes:
         left, top = positionalToCartesian(box[0], box[1])
-        pygame.draw.rect(DISPLAY, BGCOLOR, (left, top, BOXSIZE, BOXSIZE))
+        pygame.draw.rect(DISPLAY, cts.BGCOLOR, (left, top, cts.BOXSIZE, cts.BOXSIZE))
         ball = getBall(board, box[0], box[1])
         drawIcon(ball, box[0], box[1])
         if cover > 0: 
-            pygame.draw.rect(DISPLAY, BOXCOLOR, (left, top, BOXSIZE, BOXSIZE))
+            pygame.draw.rect(DISPLAY, cts.BOXCOLOR, (left, top, cts.BOXSIZE, cts.BOXSIZE))
     pygame.display.update()
     FPSCLOCK.tick(FPS)
 
@@ -51,7 +51,7 @@ def revealedBoxesAnimation(board, boxesToReveal):
     This function uses the drawBoxCovers function to reveal the boxes in order to decrease the cover paramether from
     the maximum to a negative value (box revealed)
     '''
-    for coverage in range(BOXSIZE, (- REVEALSPEED) - 1, - REVEALSPEED): # The minimum value to the speed must be 1
+    for coverage in range(cts.BOXSIZE, (- cts.REVEALSPEED) - 1, - cts.REVEALSPEED): # The minimum value to the speed must be 1
         drawBoxCovers(board, boxesToReveal, coverage)
 
 def coverBoxesAnimation(board, boxesToCover):
@@ -59,7 +59,7 @@ def coverBoxesAnimation(board, boxesToCover):
     This function uses the drawBoxCovers function to reveal the boxes in order to increase the cover paramether from
     the minimum to a value over the maximum (box covered)
     '''
-    for coverage in range(0, BOXSIZE + REVEALSPEED, REVEALSPEED): # The minimum value to the speed must be 1
+    for coverage in range(0, cts.BOXSIZE + cts.REVEALSPEED, cts.REVEALSPEED): # The minimum value to the speed must be 1
         drawBoxCovers(board, boxesToCover, coverage)
 
 def drawHighlightBox(boxx, boxy):
@@ -67,7 +67,7 @@ def drawHighlightBox(boxx, boxy):
     This function draw a perimether around the box passed with the highlightcolor
     '''
     left, top = positionalToCartesian(boxx, boxy)
-    pygame.draw.rect(DISPLAY, HIGHLIGHTCOLOR, (left - 5, top - 5, BOXSIZE + 10, BOXSIZE + 10), 4) # 4 is for the width of the line
+    pygame.draw.rect(DISPLAY, cts.HIGHLIGHTCOLOR, (left - 5, top - 5, cts.BOXSIZE + 10, cts.BOXSIZE + 10), 4) # 4 is for the width of the line
 
 def startGameAnimation(board):
     '''
@@ -75,8 +75,8 @@ def startGameAnimation(board):
     '''
     coveredBoxes = generateRevealedBoxesData(False)
     boxes = []
-    for x in range(COLUMNS):
-        for y in range(ROWS):
+    for x in range(cts.COLUMNS):
+        for y in range(cts.ROWS):
             boxes.append((x, y))
     random.shuffle(boxes)
     boxGroups = splitList(4, boxes) # That is for make groups of 4 boxes to show at once
@@ -92,7 +92,7 @@ def gameWonAnimation(board):
     Then, the game is restarted after a little break
     '''
     coveredBoxes = generateRevealedBoxesData(True)
-    DISPLAY.fill(WINCOLOR)
+    DISPLAY.fill(cts.WINCOLOR)
     drawBoard(board, coveredBoxes)
     pygame.display.update()
     pygame.time.wait(3000)
