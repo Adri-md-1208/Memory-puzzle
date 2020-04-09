@@ -6,7 +6,8 @@
 import pygame, random
 
 import constants as cts
-from board import generateRevealedBoxesData, drawBoard
+from globals import DISPLAY, FPSCLOCK
+from board import generateRevealedBoxesData, getBall
 from utils import positionalToCartesian, splitList
 
 def drawIcon(ball, boxx, boxy):
@@ -16,21 +17,35 @@ def drawIcon(ball, boxx, boxy):
     left, top = positionalToCartesian(boxx, boxy)
 
     if ball == cts.POKEBALL:
-        DISPLAY.blit(pokeball, (left, top))
+        DISPLAY.blit(cts.pokeball, (left, top))
     elif ball == cts.GREATBALL:
-        DISPLAY.blit(greatball, (left, top))
+        DISPLAY.blit(cts.greatball, (left, top))
     elif ball == cts.ULTRABALL:
-        DISPLAY.blit(ultraball, (left, top)) 
+        DISPLAY.blit(cts.ultraball, (left, top)) 
     elif ball == cts.PREMIERBALL:
-        DISPLAY.blit(premierball, (left, top))
+        DISPLAY.blit(cts.premierball, (left, top))
     elif ball == cts.MASTERBALL:
-        DISPLAY.blit(masterball, (left, top))
+        DISPLAY.blit(cts.masterball, (left, top))
     elif ball == cts.SAFARIBALL:
-        DISPLAY.blit(safariball, (left, top))
+        DISPLAY.blit(cts.safariball, (left, top))
     elif ball == cts.MOONBALL:
-        DISPLAY.blit(moonball, (left, top))
+        DISPLAY.blit(cts.moonball, (left, top))
     elif ball == cts.HEAVYBALL:
-        DISPLAY.blit(heavyball, (left, top))
+        DISPLAY.blit(cts.heavyball, (left, top))
+
+def drawBoard(board, revealed):
+    '''
+    That function draw the entire board with the revealed and unrevealed boxes. The function know if a box is 
+    revealed by passing a list of revealed boxes as an argument
+    '''
+    for boxx in range(cts.COLUMNS):
+        for boxy in range(cts.ROWS):
+            left, top = positionalToCartesian(boxx, boxy)
+            if not revealed[boxx][boxy]:
+                pygame.draw.rect(DISPLAY, cts.BOXCOLOR, (left, top, cts.BOXSIZE, cts.BOXSIZE)) # Draw a box
+            else:
+                ball = getBall(board, boxx, boxy)
+                drawIcon(ball, boxx, boxy) # Draw a ball
 
 def drawBoxCovers(board, boxes, cover):
     '''
@@ -44,7 +59,7 @@ def drawBoxCovers(board, boxes, cover):
         if cover > 0: 
             pygame.draw.rect(DISPLAY, cts.BOXCOLOR, (left, top, cts.BOXSIZE, cts.BOXSIZE))
     pygame.display.update()
-    FPSCLOCK.tick(FPS)
+    FPSCLOCK.tick(cts.FPS)
 
 def revealedBoxesAnimation(board, boxesToReveal):
     '''

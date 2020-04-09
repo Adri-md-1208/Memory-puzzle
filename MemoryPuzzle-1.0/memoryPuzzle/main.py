@@ -7,16 +7,15 @@ import pygame, sys, random
 from pygame.locals import *
 
 import constants as cts 
-from board import generateRevealedBoxesData, generateRandomizedBoard, drawBoard, getBall
-from animations import startGameAnimation, drawHighlightBox, revealedBoxesAnimation, coverBoxesAnimation, gameWonAnimation
+from globals import DISPLAY, FPSCLOCK
+from board import generateRevealedBoxesData, generateRandomizedBoard, getBall
+from animations import drawBoard, startGameAnimation, drawHighlightBox, revealedBoxesAnimation, coverBoxesAnimation, gameWonAnimation
 from utils import cartesianToPositional, hasWon
 
 # MAIN LOOP
 def main():
-    global FPSCLOCK, DISPLAY
+
     pygame.init()
-    FPSCLOCK = pygame.time.Clock()
-    DISPLAY = pygame.display.set_mode((cts.WINDOWWIDTH, cts.WINDOWHEIGHT))
     pygame.display.set_caption('Memory puzzle [pokeball version]')
 
     mousex = 0

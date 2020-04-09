@@ -6,8 +6,6 @@
 import random, pygame
 
 import constants as cts
-from utils import positionalToCartesian
-from main import DISPLAY
 
 def generateRevealedBoxesData(data):
     '''
@@ -45,20 +43,6 @@ def generateRandomizedBoard():
             del icons[0] # Making the list short by deleting the icons that are already used
         board.append(column)
     return board
-
-def drawBoard(board, revealed):
-    '''
-    That function draw the entire board with the revealed and unrevealed boxes. The function know if a box is 
-    revealed by passing a list of revealed boxes as an argument
-    '''
-    for boxx in range(cts.COLUMNS):
-        for boxy in range(cts.ROWS):
-            left, top = positionalToCartesian(boxx, boxy)
-            if not revealed[boxx][boxy]:
-                pygame.draw.rect(DISPLAY, cts.BOXCOLOR, (left, top, cts.BOXSIZE, cts.BOXSIZE)) # Draw a box
-            else:
-                ball = getBall(board, boxx, boxy)
-                drawIcon(ball, boxx, boxy) # Draw a ball
 
 def getBall(board, boxx, boxy):
     '''
