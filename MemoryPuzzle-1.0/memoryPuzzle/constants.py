@@ -4,6 +4,8 @@
 # Released under a "GPLv3" license
 
 import pygame
+import tkinter as tk
+from tkinter import messagebox
 
 from utils import scaleImage
 
@@ -33,22 +35,29 @@ BOXCOLOR = BLUE
 WINCOLOR = RED
 
 # SPRITES 
+try:
+    pokeball    = scaleImage(pygame.image.load(open('sprites/pokeball.png', 'r')), (BOXSIZE, BOXSIZE))
+    greatball   = scaleImage(pygame.image.load(open('sprites/greatball.png', 'r')), (BOXSIZE, BOXSIZE))
+    ultraball   = scaleImage(pygame.image.load(open('sprites/ultraball.png', 'r')), (BOXSIZE, BOXSIZE))
+    premierball = scaleImage(pygame.image.load(open('sprites/premierball.png', 'r')), (BOXSIZE, BOXSIZE))
+    masterball  = scaleImage(pygame.image.load(open('sprites/masterball.png', 'r')), (BOXSIZE, BOXSIZE))
+    safariball  = scaleImage(pygame.image.load(open('sprites/safariball.png', 'r')), (BOXSIZE, BOXSIZE))
+    moonball    = scaleImage(pygame.image.load(open('sprites/moonball.png', 'r')), (BOXSIZE, BOXSIZE))
+    heavyball   = scaleImage(pygame.image.load(open('sprites/heavyball.png', 'r')), (BOXSIZE, BOXSIZE))
+except FileNotFoundError:
+    root = tk.Tk()
+    root.withdraw() # Hide the tk root window, we only need to show the alert box
+    messagebox.showwarning("FileNotFoundError", "The sprite you want to display are in a wrong path")
+
+# CONSTANT NAMES
 POKEBALL    = 'pokeball'
-pokeball    = scaleImage(pygame.image.load('c:/Users/Adrián/Desktop/Memory-puzzle/MemoryPuzzle-1.0/memoryPuzzle/sprites/pokeball.png'), (BOXSIZE, BOXSIZE))
 GREATBALL   = 'greatball'
-greatball   = scaleImage(pygame.image.load('c:/Users/Adrián/Desktop/Memory-puzzle/MemoryPuzzle-1.0/memoryPuzzle/sprites/greatball.png'), (BOXSIZE, BOXSIZE))
 ULTRABALL   = 'ultraball'
-ultraball   = scaleImage(pygame.image.load('c:/Users/Adrián/Desktop/Memory-puzzle/MemoryPuzzle-1.0/memoryPuzzle/sprites/ultraball.png'), (BOXSIZE, BOXSIZE))
 PREMIERBALL = 'premierball'
-premierball = scaleImage(pygame.image.load('c:/Users/Adrián/Desktop/Memory-puzzle/MemoryPuzzle-1.0/memoryPuzzle/sprites/premierball.png'), (BOXSIZE, BOXSIZE))
 MASTERBALL  = 'masterball'
-masterball  = scaleImage(pygame.image.load('c:/Users/Adrián/Desktop/Memory-puzzle/MemoryPuzzle-1.0/memoryPuzzle/sprites/masterball.png'), (BOXSIZE, BOXSIZE))
 SAFARIBALL  = 'safariball'
-safariball  = scaleImage(pygame.image.load('c:/Users/Adrián/Desktop/Memory-puzzle/MemoryPuzzle-1.0/memoryPuzzle/sprites/safariball.png'), (BOXSIZE, BOXSIZE))
 MOONBALL    = 'moonball'
-moonball    = scaleImage(pygame.image.load('c:/Users/Adrián/Desktop/Memory-puzzle/MemoryPuzzle-1.0/memoryPuzzle/sprites/moonball.png'), (BOXSIZE, BOXSIZE))
 HEAVYBALL   = 'heavyball'
-heavyball   = scaleImage(pygame.image.load('c:/Users/Adrián/Desktop/Memory-puzzle/MemoryPuzzle-1.0/memoryPuzzle/sprites/heavyball.png'), (BOXSIZE, BOXSIZE))
 
 BALLS =   [POKEBALL, GREATBALL, ULTRABALL, PREMIERBALL, MASTERBALL, SAFARIBALL, MOONBALL, HEAVYBALL]
 
