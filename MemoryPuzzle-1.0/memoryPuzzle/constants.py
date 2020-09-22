@@ -3,11 +3,12 @@
 # E-mail : a.morales.2019@alummos.urjc.es
 # Released under a "GPLv3" license
 
+import os
 import pygame
 import tkinter as tk
 from tkinter import messagebox
 
-from utils import scaleImage
+import utils as utl
 
 # CONSTANTS
 FPS = 30
@@ -36,16 +37,17 @@ BOXCOLOR = BLUE
 WINCOLOR = RED
 TIMERCOLOR = RED_SOFT
 
-# SPRITES 
+# SPRITES
+dirname = os.path.dirname(__file__)
 try:
-    pokeball    = scaleImage(pygame.image.load(open('sprites/pokeball.png', 'r')), (BOXSIZE, BOXSIZE))
-    greatball   = scaleImage(pygame.image.load(open('sprites/greatball.png', 'r')), (BOXSIZE, BOXSIZE))
-    ultraball   = scaleImage(pygame.image.load(open('sprites/ultraball.png', 'r')), (BOXSIZE, BOXSIZE))
-    premierball = scaleImage(pygame.image.load(open('sprites/premierball.png', 'r')), (BOXSIZE, BOXSIZE))
-    masterball  = scaleImage(pygame.image.load(open('sprites/masterball.png', 'r')), (BOXSIZE, BOXSIZE))
-    safariball  = scaleImage(pygame.image.load(open('sprites/safariball.png', 'r')), (BOXSIZE, BOXSIZE))
-    moonball    = scaleImage(pygame.image.load(open('sprites/moonball.png', 'r')), (BOXSIZE, BOXSIZE))
-    heavyball   = scaleImage(pygame.image.load(open('sprites/heavyball.png', 'r')), (BOXSIZE, BOXSIZE))
+    pokeball    = utl.scaleImage(pygame.image.load(open(os.path.join(dirname, 'sprites/pokeball.png'), 'r')), (BOXSIZE, BOXSIZE))
+    greatball   = utl.scaleImage(pygame.image.load(open(os.path.join(dirname, 'sprites/greatball.png'), 'r')), (BOXSIZE, BOXSIZE))
+    ultraball   = utl.scaleImage(pygame.image.load(open(os.path.join(dirname, 'sprites/ultraball.png'), 'r')), (BOXSIZE, BOXSIZE))
+    premierball = utl.scaleImage(pygame.image.load(open(os.path.join(dirname, 'sprites/premierball.png'), 'r')), (BOXSIZE, BOXSIZE))
+    masterball  = utl.scaleImage(pygame.image.load(open(os.path.join(dirname, 'sprites/masterball.png'), 'r')), (BOXSIZE, BOXSIZE))
+    safariball  = utl.scaleImage(pygame.image.load(open(os.path.join(dirname, 'sprites/safariball.png'), 'r')), (BOXSIZE, BOXSIZE))
+    moonball    = utl.scaleImage(pygame.image.load(open(os.path.join(dirname, 'sprites/moonball.png'), 'r')), (BOXSIZE, BOXSIZE))
+    heavyball   = utl.scaleImage(pygame.image.load(open(os.path.join(dirname, 'sprites/heavyball.png'), 'r')), (BOXSIZE, BOXSIZE))
 except FileNotFoundError:
     root = tk.Tk()
     root.withdraw() # Hide the tk root window, we only need to show the alert box
