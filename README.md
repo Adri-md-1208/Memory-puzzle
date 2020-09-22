@@ -33,4 +33,4 @@ git clone https://github.com/Adri-md-1208/Python-Data-Structures.git
 Or by downloading the last version in the tag section.
 
 ## Version
-1.0
+1.1
