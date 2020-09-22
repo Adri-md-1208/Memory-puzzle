@@ -38,6 +38,10 @@ def drawBoard(board, revealed):
     That function draw the entire board with the revealed and unrevealed boxes. The function know if a box is 
     revealed by passing a list of revealed boxes as an argument
     '''
+    pygame.draw.rect(DISPLAY, cts.TIMERCOLOR, (cts.XMARGIN, cts.BOXSIZE, (cts.BOXSIZE + cts.GAPSIZE) * 4, cts.BOXSIZE)) # Background of the clock
+    time = round(pygame.time.get_ticks() / 1000) # Time in seconds
+    text = cts.FONT.render(str(time), True, cts.BLACK) # Text of the clock
+    DISPLAY.blit(text, ((cts.XMARGIN + 90, cts.BOXSIZE + 8)))
     for boxx in range(cts.COLUMNS):
         for boxy in range(cts.ROWS):
             left, top = positionalToCartesian(boxx, boxy)

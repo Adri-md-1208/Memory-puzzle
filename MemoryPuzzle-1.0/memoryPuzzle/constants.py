@@ -21,10 +21,14 @@ COLUMNS      =   4
 ROWS         =   4
 assert (COLUMNS * ROWS) % 2 == 0 , 'The number of boxes must be even'
 XMARGIN = int((WINDOWWIDTH - (COLUMNS * (BOXSIZE + GAPSIZE))) / 2) # Divided by 2 because XMARGIN seems the left and right margin
-YMARGIN = int((WINDOWHEIGHT - (ROWS * (BOXSIZE + GAPSIZE))) / 2) 
+YMARGIN = int((WINDOWHEIGHT - (ROWS * (BOXSIZE + GAPSIZE))) / 2)
+
+pygame.font.init()
+FONT = pygame.font.SysFont('Consolas', 35)
 
 # COLORS 
 #             R    G    B
+BLACK    = (  0,   0,   0)
 GRAY     = (192, 192, 192)
 BLUE     = (  0,   0, 255)
 CYAN     = (  0, 255, 255)
