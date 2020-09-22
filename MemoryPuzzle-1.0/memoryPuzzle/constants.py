@@ -23,16 +23,18 @@ XMARGIN = int((WINDOWWIDTH - (COLUMNS * (BOXSIZE + GAPSIZE))) / 2) # Divided by 
 YMARGIN = int((WINDOWHEIGHT - (ROWS * (BOXSIZE + GAPSIZE))) / 2) 
 
 # COLORS 
-#         R    G    B
-GRAY = (192, 192, 192)
-BLUE = (  0,   0, 255)
-CYAN = (  0, 255, 255)
-RED  = (255,   0,   0)
+#             R    G    B
+GRAY     = (192, 192, 192)
+BLUE     = (  0,   0, 255)
+CYAN     = (  0, 255, 255)
+RED      = (255,   0,   0)
+RED_SOFT = (255, 120, 120)
 
 BGCOLOR = GRAY
 HIGHLIGHTCOLOR = CYAN # The color around a box when the mouse is over
 BOXCOLOR = BLUE
 WINCOLOR = RED
+TIMERCOLOR = RED_SOFT
 
 # SPRITES 
 try:
