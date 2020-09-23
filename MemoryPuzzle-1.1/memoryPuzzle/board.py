@@ -3,7 +3,8 @@
 # E-mail : a.morales.2019@alummos.urjc.es
 # Released under a "GPLv3" license
 
-import random, pygame
+import random
+import pygame
 
 import constants as cts
 

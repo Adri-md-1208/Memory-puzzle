@@ -3,7 +3,9 @@
 # E-mail : a.morales.2019@alummos.urjc.es
 # Released under a "GPLv3" license
 
-import pygame, sys, random 
+import pygame
+import sys
+import random
 from pygame.locals import *
 
 import constants as cts 
@@ -44,7 +46,7 @@ def main():
                 mouseClicked = True
             
         boxx, boxy = cartesianToPositional(mousex, mousey)
-        if boxx != None and boxy != None: # When the mouse is over a box
+        if boxx is not None and boxy is not None: # When the mouse is over a box
             if not revealedBoxes[boxx][boxy]:
                 drawHighlightBox(boxx, boxy)
             if not revealedBoxes[boxx][boxy] and mouseClicked:
