@@ -69,7 +69,7 @@ pythondialog==3.5.1
 pytz==2021.1
 PyYAML==5.4.1
 qtile==0.17.0
-qutebrowser==2.2.3
+qutebrowser==2.4.0
 rados==2.0.0
 ranger-fm==1.9.3
 rbd==2.0.0
